@@ -1,0 +1,24 @@
+{
+  "name": "easyvote",
+  "version": "1.0.0",
+  "description": "\"A voting application\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rgagn094/EasyVote.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rgagn094/EasyVote/issues"
+  },
+  "homepage": "https://github.com/rgagn094/EasyVote#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.3.7",
+    "nodemon": "^1.18.5"
+  }
+}
