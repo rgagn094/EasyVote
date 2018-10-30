@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
+const ObjectId = Schema.Types.ObjectId;
 /*
 Schema for User Model
 */
@@ -25,14 +26,12 @@ UserSchema = new Schema({
 		type:String,
 		required:true
 	},
-	// electionBodies: {
-	// 	type: 
-	// },
+	electionBodies: [ObjectId],
 	// demographics: {
 
 	// },
 	// meta: {
-		
+
 	// }
 
 
