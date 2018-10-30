@@ -9,7 +9,7 @@ Set up mongodb/mongoose
 */
 const mongoose = require('mongoose');
 let uri = "mongodb://easyvote:passw0rd@ds243963.mlab.com:43963/easyvote"
-mongoose.connect(uri).then(()=>{
+mongoose.connect(uri, {useNewUrlParser: true}).then(()=>{
 	console.log("Connected to Database");
 
 }).catch((err)=>{
@@ -20,7 +20,7 @@ mongoose.connect(uri).then(()=>{
 /*
 Configure routes
 */
-app.use('/user', userRouter); 
+app.use('/user', userRouter);
 
 //used to test if server is running
 app.get('/', (req,res)=>{
@@ -29,9 +29,8 @@ app.get('/', (req,res)=>{
 
 
 /*
-Run server 
+Run server
 */
 app.listen(port, ()=> {
 	console.log(`App is listening on port ${port}`);
 })
-
