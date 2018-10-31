@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Schema = require("schema");
+const Schema = mongoose.Schema;
 
 /*
 Constructor to create a phone number as a subdocument
@@ -14,3 +14,5 @@ let PhoneSchema = new Schema({
 		type: Number
 	}
 })
+
+module.exports = PhoneSchema

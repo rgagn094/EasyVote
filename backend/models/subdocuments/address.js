@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Schema = require("schema");
+const Schema = mongoose.Schema
 
 /*
 Constructor to create an address as a subdocument
@@ -22,12 +22,12 @@ let AddressSchema = new Schema({
 	country: {
 		type: String
 	},
-	stateCode: {. //for faster lookup
+	stateCode: { //for faster lookup
 		type: String,
-	}.
+	},
 	countryCode: { //for faster lookup
 		type: String
 	}
 
 })
-
+module.exports = AddressSchema

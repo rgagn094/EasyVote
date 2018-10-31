@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId;
 const AddressSchema = require("./subdocuments/address.js");
 const PhoneSchema = require("./subdocuments/phone.js");
-const Schema = mongoose.Schema;
+
 
 /*
 Schema for User Model
@@ -36,7 +36,7 @@ UserSchema = new Schema({
 		required:true,
 		minLength: 8
 	},
-	phone: phoneSchema,
+	phone: PhoneSchema,
 	electionBodies: {	//Array of election bodies that user is verified for
 	 	type: [ObjectId],	//Array of ElectionBody id's
 		ref: 'ElectionBody',
@@ -67,7 +67,7 @@ UserSchema = new Schema({
 		lastAccessLocation: {
 			type: String,
 		},
-		ipAddress; {
+		ipAddress: {
 			type: String
 		},
 		tokenPasscode: {
@@ -82,6 +82,7 @@ UserSchema = new Schema({
 			required: true,
 			default: 'user'
 		}
+}
 })
 
 const User = mongoose.model('User', UserSchema);
