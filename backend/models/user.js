@@ -23,7 +23,6 @@ UserSchema = new Schema({
 	otherNames: {	//Any other legal names
 		type: String,
 		lowercase: true,
-		required:false	//Set to false as some indivuals only have first and last names
 	},
 	email: {	//User's email address
 		type: String,
@@ -37,8 +36,8 @@ UserSchema = new Schema({
 		minLength: 8
 	},
 	phone: PhoneSchema,
-	electionBodies: {	//Array of election bodies that user is verified for
-	 	type: [ObjectId],	//Array of ElectionBody id's
+	electionBody: {	//Array of election bodies that user is verified for
+	 	type: ObjectId,	//Array of ElectionBody id's
 		ref: 'ElectionBody',
 		required: false
 	},
@@ -49,7 +48,7 @@ UserSchema = new Schema({
 		birthDate: {
 			type: Date
 		},
-		address: [AddressSchema],
+		address: AddressSchema,
 
 	},
 	meta: {  //Nested object containing other useful information
@@ -59,10 +58,12 @@ UserSchema = new Schema({
 		},
 		dateJoined: {
 			type: Date,
-			required: true
+			required: true,
+			default: Date.now()
 		},
 		lastAccessTime:{
 			type: Date,
+			default: Date.now()
 		},
 		lastAccessLocation: {
 			type: String,

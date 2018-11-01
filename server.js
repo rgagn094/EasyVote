@@ -3,7 +3,7 @@ const bodyParser = require("body-parser"); //used to extract information from fo
 const app = express(); //initiale a new express application
 const port = 8000; //port this app will listen on
 const userRouter = require("./backend/routes/user"); //load routes for users
-const elecionBodyRouter = require("./backend/routes/user")
+const elecionBodyRouter = require("./backend/routes/electionbody")
 
 /*
 Set up mongodb/mongoose
@@ -19,7 +19,7 @@ mongoose.connect(uri, {useNewUrlParser: true}).then(()=>{
 
 
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded({extended:true}))
 
 /*
 Configure routes
