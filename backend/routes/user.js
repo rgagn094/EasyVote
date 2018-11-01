@@ -48,6 +48,8 @@ router.post('/register', [
 	.custom((value,{req})=>{ //custom validator checks if passwors match
 		if(value!= req.body.password2){
 			throw new Error("Passwords do not match")
+		}else {
+			return true
 		}
 	})
 	],(req,res)=>{
