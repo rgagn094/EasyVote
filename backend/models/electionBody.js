@@ -20,10 +20,12 @@ ElectionBodySchema = new Schema({
     default: Date.now
   },
   logo: { //Path to the logo image file
-    type: String
+    type: String,
+    default: "[path to generic logo]"
   },
   description: {  //Description of the election body
-    type: String
+    type: String,
+    default: "No description available"
   }
 
 })

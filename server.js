@@ -3,7 +3,7 @@ const bodyParser = require("body-parser"); //used to extract information from fo
 const app = express(); //initiale a new express application
 const port = 8000; //port this app will listen on
 const userRouter = require("./backend/routes/user"); //load routes for users
-const elecionBodyRouter = require("./backend/routes/electionbody")
+const electionBodyRouter = require("./backend/routes/electionbody")
 
 /*
 Set up mongodb/mongoose
@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 Configure routes
 */
 app.use('/user', userRouter);
-app.use('/electionbody', elecionBodyRouter)
+app.use('/electionBody', electionBodyRouter);
 
 //used to test if server is running
 app.get('/', (req,res)=>{
