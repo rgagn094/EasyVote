@@ -49,15 +49,24 @@ router.get('/find/:electionBodyId', function(req,res){
 });
 
 /*
-List users within an election body
+List elections hosted by election body
 */
 
-router.get('/list/:electionBodyId/users', function(req,res){
+router.get('/list/:electionBodyId/elections', function(req,res){
   console.log("Received list users of election body request");
 
-  res.status(501).end();
-  console.log("Route not implemented yet");
-})
+  ElectionBody.findById(req.params.electionBodyId, function(err,foundDoc){
+    if(err){
+      console.log(err);
+      res.status(500).send();
+    }else if(!foundDoc){
+      console.log("No election body found");
+      res.status(404).send();
+    }else{
+      res.status(200).json(foundDoc.elections);
+    }
+  });
+});
 
 /*
 List election bodies
@@ -102,14 +111,17 @@ router.put('/edit/:electionBodyId', function(req,res){
       if(req.body.name){
         foundDoc.name = req.body.name;
       }
-      else if(req.body.country){
+      if(req.body.country){
         foundDoc.country = req.body.country;
       }
-      else if(req.body.logo){
+      if(req.body.logo){
         foundDoc.logo = req.body.logo;
       }
-      else if(req.body.description){
+      if(req.body.description){
         foundDoc.description = req.body.description;
+      }
+      if(req.body.elections){  //Must test when elections routing has been implemented
+        foundDoc.elections.push(req.body.elections);
       }
 
       foundDoc.save(function(err, updatedDoc){

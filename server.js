@@ -4,6 +4,7 @@ const app = express(); //initiale a new express application
 const port = 8000; //port this app will listen on
 const userRouter = require("./backend/routes/user"); //load routes for users
 const electionBodyRouter = require("./backend/routes/electionbody")
+const voteRouter = require("./backend/routes/vote");
 
 /*
 Set up mongodb/mongoose
