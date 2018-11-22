@@ -6,8 +6,36 @@ ElectionSchema = new Schema({
     type: String,
     required: true
   },
-  candidates: { //List of candidate documents participating in election
-    //TODO
+  candidates: [{//List of candidate documents participating in election
+      candidateID: {  //Reference to the user that cast the vote
+          type: Schema.Types.ObjectId,
+          ref: 'User',
+          required: true
+      },
+      firstName: {//Candidate's legal first name
+          type: String,
+          required: true,
+          lowercase: true,
+      },
+      lastName: {//Candidate's legal last name
+          type: String,
+          required: true,
+          lowercase: true,
+      },
+      image: {	//Any other legal names
+          //TODO
+      },
+      decription: {
+          type: String,
+      },
+      party: {
+          type: String
+      }
+
+  }],
+  active: { //refuse delete if election is active
+      type: Boolean,
+      default: true
   },
   startDate: {  //start date of voting for election
     type: Date,
@@ -29,9 +57,9 @@ ElectionSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'ElectionBody',
       required: true
-    }
-  }
-})
+    },
+  },
+});
 
 const Election = mongoose.model('Election', ElectionSchema);
 module.exports = Election;
