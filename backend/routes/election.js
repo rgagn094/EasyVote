@@ -12,8 +12,8 @@ router.post('/register', function(req,res){
 
     newElection.title = req.body.title;
     newElection.candidates = req.body.candidates;
-    newElection.startDate = req.body.startDate;
-    newElection.expiryDate = req.body.expiryDate;
+    //newElection.startDate = req.body.startDate;
+    //newElection.expiryDate = req.body.expiryDate;
 
     newElection.save(function(err, election){
         if(err){
@@ -116,5 +116,6 @@ router.put('/edit/:electionId', function(req,res){
     });
 });
 
+var Election = mongoose.model('Elect', election);
 
 module.exports = router;

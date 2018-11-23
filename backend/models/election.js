@@ -9,7 +9,7 @@ ElectionSchema = new Schema({
   candidates: [{//List of candidate documents participating in election
       candidateID: {  //Reference to the user that cast the vote
           type: Schema.Types.ObjectId,
-          ref: 'User',
+          ref: 'ElectionBody',
           required: true
       },
       firstName: {//Candidate's legal first name
