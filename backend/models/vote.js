@@ -5,11 +5,19 @@ const Schema = mongoose.Schema;
 Schema for a vote
 */
 VoteSchema = new Schema({
-  voter: {  //Full legal name of voter, I'm worried this may present anonymity concerns
+  hashedID: {  //hashed user ID of voter
     type: String,
     required: true
   },
-  geoLocation: {  //Physical geo location vote was made (security)
+  candidate: { //Candidate the voter has chosen
+    type: String,
+    required: true
+  },
+  geoLocation: {  //Physical coordinates vote was made (security)
+    type: [Number],
+    required: true
+  },
+  country: {
     type: String,
     required: true
   },
@@ -17,13 +25,13 @@ VoteSchema = new Schema({
     type: String,
     required: true
   },
-  voterID: {  //Reference to the user that cast the vote
+  electionID: {  //Reference to the election that the vote was cast for
     type: Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'election',
     required: true
   },
   demographics: {
-    province: { //province of the user at the time of vote
+    city: { //province of the user at the time of vote
       type: String,
       required: true
     },

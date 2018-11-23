@@ -20,7 +20,7 @@ router.post('/register', function(req,res){
       console.log(err);
       res.status(500).send();
     }
-    res.send(electionBody);
+    res.status(200).send(electionBody);
     console.log("Data saved to database");
   });
 });
