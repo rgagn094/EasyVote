@@ -55,7 +55,7 @@ List election
 
 router.get('/list', function(req,res){
 
-    console.log("Received get all election body request...");
+    console.log("Received get all elections request...");
 
     Election.find({}, function(err,foundData){
         if(err){
@@ -79,7 +79,7 @@ Edit election
 router.put('/edit/:electionId', function(req,res){
     console.log("Received edit request...");
 
-    ElectionBody.findById(req.params.electionId, function(err,foundDoc){
+    Election.findById(req.params.electionId, function(err,foundDoc){
         if(err){
             console.log(err);
             res.status(500).send();
@@ -115,7 +115,5 @@ router.put('/edit/:electionId', function(req,res){
         }
     });
 });
-
-var Election = mongoose.model('Elect', election);
 
 module.exports = router;

@@ -2,14 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 ElectionSchema = new Schema({
-  title: {  //Title of the election e.g. 2016 Presidential Election
+    title: {  //Title of the election e.g. 2016 Presidential Election
     type: String,
     required: true
   },
   candidates: [{//List of candidate documents participating in election
       candidateID: {  //Reference to the user that cast the vote
           type: Schema.Types.ObjectId,
-          ref: 'ElectionBody',
+          ref: 'electionBody',
           required: true
       },
       firstName: {//Candidate's legal first name
@@ -55,7 +55,7 @@ ElectionSchema = new Schema({
     },
     electionBody: { //Reference to the election body hosting election
       type: Schema.Types.ObjectId,
-      ref: 'ElectionBody',
+      ref: 'electionBody',
       required: true
     },
   },
