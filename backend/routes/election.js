@@ -1,17 +1,19 @@
-const router = require('express').Router();
+var express = require('express');
+
 const Election = require('../models/election');
+var election = express.Router();
 
 /*
 Create an election
 */
 
-router.post('/register', function(req,res){
+election.post('/', function(req,res){
     console.log("Received Post new election request...");
 
     var newElection = new Election();
 
     newElection.title = req.body.title;
-    newElection.candidates = req.body.candidates;
+    //newElection.candidates = req.body.candidates;
     //newElection.startDate = req.body.startDate;
     //newElection.expiryDate = req.body.expiryDate;
 
@@ -30,7 +32,7 @@ router.post('/register', function(req,res){
 Get an election
 */
 
-router.get('/find/:electionId', function(req,res){
+election.get('/:electionId', function(req,res){
     console.log("Received get by ID request");
 
     Election.findById(req.params.electionId, function(err,foundDoc){
@@ -92,6 +94,7 @@ router.put('/edit/:electionId', function(req,res){
             if(req.body.title){
                 foundDoc.title = req.body.title;
             }
+            /*
             if(req.body.candidates){
                 foundDoc.candidates = req.body.candidates;
             }
@@ -101,7 +104,7 @@ router.put('/edit/:electionId', function(req,res){
             if(req.body.expiryDate){  //Must test when elections routing has been implemented
                 foundDoc.expiryDate = req.body.expiryDate;
             }
-
+*/
             foundDoc.save(function(err, updatedDoc){
                 if(err){
                     console.log(err);
@@ -116,4 +119,11 @@ router.put('/edit/:electionId', function(req,res){
     });
 });
 
-module.exports = router;
+/*
+delete election
+*/
+
+
+
+
+module.exports = election;
