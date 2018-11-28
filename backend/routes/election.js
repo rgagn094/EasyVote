@@ -1,13 +1,13 @@
-var express = require('express');
-
+//var express = require('express');
+let router = require('express').Router();
 const Election = require('../models/election');
-var election = express.Router();
+//var election = express.Router();
 
 /*
 Create an election
 */
 
-election.post('/', function(req,res){
+router.post('/', function(req,res){
     console.log("Received Post new election request...");
 
     var newElection = new Election();
@@ -32,7 +32,7 @@ election.post('/', function(req,res){
 Get an election
 */
 
-election.get('/:electionId', function(req,res){
+router.get('/:electionId', function(req,res){
     console.log("Received get by ID request");
 
     Election.findById(req.params.electionId, function(err,foundDoc){
@@ -125,5 +125,6 @@ delete election
 
 
 
+module.exports = router;
 
-module.exports = election;
+//module.exports = election;
