@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {FormInput,Card,FormButton,Link,Spinner,ForwardButton} from './index';
+import {FormInput,Card,FormButton,HomeHeader2,Spinner,ForwardButton} from './index';
 //import {connect} from 'react-redux';
 //import {emailChanged,passwordChanged,loginUser} from '../actions';
 import { AsyncStorage } from "react-native"
@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 
 
-class HomeForm extends Component {
+class SignUpForm extends Component {
 
       
 
@@ -55,20 +55,32 @@ class HomeForm extends Component {
   render() {
     //const {vall} = this.props;
     return (
-    <SafeAreaView style={{width:'80%',margin:'5%', height:'100%',alignSelf:'center', marginTop:'40%'}}>
-      <KeyboardAvoidingView  behavior = {(Platform.OS === 'ios') ? 'position' : 'height'}>
+    <SafeAreaView >
+     <HomeHeader2 navigate={this.props.navigation.goBack}/>
+      <KeyboardAvoidingView style={{width:'90%',margin:'5%',marginTop:'30%'}} behavior = {(Platform.OS === 'ios') ? 'position' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
+       
         <View style = {styles.viewStyle}>
-        <Text style = {{ alignSelf:'center', fontSize: 40}}>Easy Vote</Text>
+        <Text style = {{ alignSelf:'center', marginBottom:'20%', fontSize: 40}}>Easy Vote</Text>
         </View>
 
+        <Card>
+        <FormInput /*val={this.props.email} ct={this.onEmailChanged.bind(this)}*/  bool = {false} ph = {"Email"}/>
+        </Card>
         
         
-       {/* </View> */ /* */}
-       <View style={{flexDirection:'row', bottom:0,alignItems:'center', alignSelf:'center', marginTop:'15%'}} >
-       <Text style = {{ alignSelf:'center',alignItems:'flex-end', marginLeft:20,  fontSize: 30}}> Get Started</Text>
-      <ForwardButton place={'LogOrSign'}  press = {this.props.navigation.navigate}/>  
+        
+        {/* <View style={{height: 40, alignItems:'center', alignSelf: 'center', width: "100%"}}> */}
+       
+
+        <Card>
+        <FormInput /*val={this.props.email} ct={this.onEmailChanged.bind(this)}*/  bool = {false} ph = {"Input Password"}/>
+        </Card>
+        
+       {/* </View> */}
+       <View >
+      <ForwardButton press = {this.props.navigation.navigate}/>
        
        </View>
        </View>
@@ -90,17 +102,17 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: 'white',
+      backgroundColor: '#F4F2F3',
       width: '100%',
 
     },
     viewStyle: {
        // height: '100%',
-       marginTop: '50%',
+       marginTop: '20%',
         width: '100%',
     },
    
     
   });
 
-  export default HomeForm;
+  export default SignUpForm;

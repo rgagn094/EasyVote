@@ -22,10 +22,10 @@ import {
 export default class LogOrSign extends Component {
   static navigationOptions = { header: null };
   render() {
-  //  const{navigation} = this.props;
+    const{navigation} = this.props;
     return (
     
-        <LogOrSignForm /> //navigation={navigation}/>
+        <LogOrSignForm navigation={navigation}/>
     
     );
   }

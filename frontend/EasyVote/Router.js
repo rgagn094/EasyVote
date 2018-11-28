@@ -7,12 +7,13 @@ import LogOrSign from './src/pages/LogOrSign';
 import Profile from './src/pages/Profile';
 import Security from './src/pages/Security';
 import ProfileEdit from './src/pages/ProfileEdit';
-
+import SignUp from './src/pages/SignUp';
 export const Router = StackNavigator({
     Home:{ screen: Home},
     LogOrSign:{screen:LogOrSign},
-   // Login: { screen: Login },
-    
+    SignUp:{screen:SignUp},
+    Login: { screen: Login },
+    Security:{screen:Security},
 },
 {headerMode: 'none'}) 
 

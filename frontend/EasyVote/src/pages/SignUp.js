@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LoginForm from '.././components/LoginForm';
+import SignUpForm from '.././components/SignUpForm';
 //import {Provider} from 'react-redux';
 //import{createStore, applyMiddleware} from 'redux';
 //import ReduxThunk from 'redux-thunk'
@@ -25,7 +25,7 @@ export default class Login extends Component {
     const{navigation} = this.props;
     return (
     
-        <LoginForm navigation={navigation}/>
+        <SignUpForm navigation={navigation}/>
     
     );
   }

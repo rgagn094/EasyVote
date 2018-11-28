@@ -3,7 +3,7 @@ import {StyleSheet,TouchableOpacity,Image} from 'react-native';
 
 const ForwardButton = (props) =>{
     return(
-        <TouchableOpacity onPress={() =>{props.press}} style={{alignSelf: 'flex-end',
+        <TouchableOpacity onPress={() =>{props.press(props.place)}} style={{alignSelf: 'flex-end',
         alignItems:'flex-end',
         justifyContent: 'flex-end'}}> 
          <Image style={{height: 40, width:40,marginTop:12, marginLeft:20}}

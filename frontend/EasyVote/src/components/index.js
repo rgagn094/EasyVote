@@ -8,3 +8,4 @@ export * from './FormButton2';
 export * from './HeaderSet';
 export * from './ProfileHome';
 export * from './HomeHeader';
+export * from './HomeHeader2';

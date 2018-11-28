@@ -1,12 +1,12 @@
 import React from 'react';
 import {View,Text, StyleSheet, TouchableOpacity,Image} from 'react-native'
 
-const HomeHeader = (props) =>{
+const HomeHeader2 = (props) =>{
     return(
     <View style={styles.viewStyle}>
 
          <TouchableOpacity onPress={() =>
-            props.navigate()} style={{ justifyContent:'flex-start'}} > 
+            props.navigate()}style={{ justifyContent:'flex-start'}} > 
          <Image style={{height: 20, width:20,marginTop:12, marginLeft:20}}
             source={require('../.././images/leftarroww.png')}
             resizeMode = 'contain'/>
@@ -32,10 +32,10 @@ const styles = StyleSheet.create({
         alignItems:'flex-start',
        justifyContent:'space-between',
         flexDirection: 'column',
-        marginBottom:35,
+        marginBottom:10,
         width: '100%',
         height: '13%',
-        backgroundColor: 'white',
+        //backgroundColor: '#F4F2F3',
     
     
     },
@@ -43,4 +43,4 @@ const styles = StyleSheet.create({
    
 });
 
-export {HomeHeader};
+export {HomeHeader2};

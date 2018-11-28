@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {FormInput,Card,FormButton,Link,Spinner,ForwardButton} from './index';
+import {FormInput,Card,FormButton,HomeHeader2,Spinner,ForwardButton} from './index';
 //import {connect} from 'react-redux';
 //import {emailChanged,passwordChanged,loginUser} from '../actions';
 import { AsyncStorage } from "react-native"
@@ -55,8 +55,9 @@ class LoginForm extends Component {
   render() {
     //const {vall} = this.props;
     return (
-    <SafeAreaView style={{width:'90%',margin:'5%',marginTop:'30%'}}>
-      <KeyboardAvoidingView  behavior = {(Platform.OS === 'ios') ? 'position' : 'height'}>
+    <SafeAreaView >
+    <HomeHeader2 navigate={this.props.navigation.goBack}/>
+      <KeyboardAvoidingView style={{width:'90%',margin:'5%',marginTop:'30%',marginBottom:'0%'}}  behavior = {(Platform.OS === 'ios') ? 'position' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
         <View style = {styles.viewStyle}>
@@ -84,7 +85,7 @@ class LoginForm extends Component {
         </Card>
        {/* </View> */}
        <View >
-      <ForwardButton/>
+      <ForwardButton press = {this.props.navigation.navigate} place ={'Security'}/>
        
        </View>
        </View>
@@ -108,6 +109,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       backgroundColor: '#F4F2F3',
       width: '100%',
+
 
     },
     viewStyle: {

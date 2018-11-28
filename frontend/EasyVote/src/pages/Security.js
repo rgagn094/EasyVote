@@ -22,10 +22,10 @@ import {
 export default class Security extends Component {
   static navigationOptions = { header: null };
   render() {
-    
+    const{navigation} = this.props;
     return (
     
-        <SecForm/>
+        <SecForm navigation={navigation}/>
     
     );
   }

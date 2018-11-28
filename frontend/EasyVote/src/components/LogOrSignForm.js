@@ -67,12 +67,12 @@ class LogOrSignForm extends Component {
         
        {/* </View> */}
        <View style={{flexDirection:'row',alignItems:'center',marginBottom:20, height:'7%', alignSelf:'center'}} >
-       <FormButton2  val = {"Login"}/>
+       <FormButton2 press = {this.props.navigation.navigate} place ={'SignUp'}   val = {"Login"}/>
        
        </View>
        <View style={{flexDirection:'row',alignItems:'center', height:'7%', alignSelf:'center'}} >
     
-       <FormButton  val = {"Sign Up"}/>
+       <FormButton press = {this.props.navigation.navigate} place ={'Login'}  val = {"Sign Up"}/>
        </View>
        </View>
        
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#F4F2F3',
+      backgroundColor: 'white',
       width: '100%',
 
     },
