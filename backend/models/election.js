@@ -5,7 +5,7 @@ var candidateSchema = new Schema({
     candidateID: {  //Reference to the user that cast the vote
         type: Schema.Types.ObjectId,
         ref: 'electionBody',
-        //required: true
+        required: true
     },
     firstName: {//Candidate's legal first name
         type: String,
@@ -20,7 +20,7 @@ var candidateSchema = new Schema({
     image: {	//Any other legal names
         //TODO
     },
-    decription: {
+    description: {
         type: String,
     },
     party: {
@@ -42,7 +42,7 @@ ElectionSchema = new Schema({
     },
     startDate: {  //start date of voting for election
         type: Date,
-        //required: true
+        required: true
     },
     expiryDate: { //end date of voting for election
         type: Date,
@@ -59,7 +59,7 @@ ElectionSchema = new Schema({
         electionBody: { //Reference to the election body hosting election
             type: Schema.Types.ObjectId,
             ref: 'electionBody',
-            //required: true
+            required: true
         },
     }
 },{
