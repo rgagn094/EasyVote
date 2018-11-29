@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import LoginForm from '.././components/LoginForm';
-//import {Provider} from 'react-redux';
-//import{createStore, applyMiddleware} from 'redux';
-//import ReduxThunk from 'redux-thunk'
-//import reducers from '../reducers'
+import {Provider} from 'react-redux';
+import{createStore, applyMiddleware} from 'redux';
+import ReduxThunk from 'redux-thunk'
+import reducers from '../reducers'
 import {
   Platform,
   StyleSheet,
@@ -24,9 +24,9 @@ export default class Login extends Component {
   render() {
     const{navigation} = this.props;
     return (
-    
+      <Provider store={createStore(reducers, {},applyMiddleware(ReduxThunk))}>
         <LoginForm navigation={navigation}/>
-    
+    </Provider>
     );
   }
 } 

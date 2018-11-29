@@ -24,6 +24,111 @@ export const passwordChanged = (text) => {
     };
 };
 
+export const passwordChanged2 = (text) => {
+        return{
+            type: 'passwordChanged2_changed',
+            payload: text
+        };
+    };
+
+    export const numberChanged = (text) => {
+            return{
+                type: 'number_changed',
+                payload: text
+            };
+        };
+
+export const FirstNameChanged = (text) => {
+        return{
+            type: 'FirstName_changed',
+            payload: text
+        };
+    };
+
+    export const LastNameChanged = (text) => {
+            return{
+                type: 'LastName_changed',
+                payload: text
+            };
+        };
+
+        export const LicenseChanged = (text) => {
+                return{
+                    type: 'License_changed',
+                    payload: text
+                };
+            };
+
+            export const LastFourChanged = (text) => {
+                    return{
+                        type: 'LastFour_changed',
+                        payload: text
+                    };
+                };
+
+      
+
+                export const Signup = ({FirstName,LastName,number,email,password,password2,Licence,fourD}) => {
+    
+                        return (dispatch) => {
+                        dispatch({type: 'Login_user'});
+                    
+                        if(email == '' || password=='' || password2=='' || Name =='' || typeof email == 'undefined' || typeof password == 'undefined' || typeof Name == 'undefined' || typeof password2 == 'undefined' ){
+                            dispatch({type: 'LoginUserFail', payload: "Empty Field"});
+                        }
+                        
+                        else{
+                            
+                        fetch('http://'+IP+':80/GGfiles/Ap/Signup.php', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                        firstName: FirstName,
+                        lastName:LastName,
+                        number:number,
+                            email: email,
+                            password: password,
+                            password2: password2,
+                    licence:Licence,
+                    SIN:fourD
+                        }),
+                        }).then((response) => response.json()).then(users => {
+                            
+                       if( typeof users.Id != 'undefined'){
+                           dispatch({type: 'LoginUserDone', payload: users});
+                        }
+                       else{
+                          dispatch({type: 'LoginUserFail', payload: users});
+                        }
+                        
+                        });
+                       }
+                      };
+                    };
+
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const fetchinfo = () => {
     return{
         type: 'infofetched',
@@ -55,7 +160,7 @@ export const markChanged2 = (graaa) => {
     };
 };
 
-export const passwordChanged2 = (text) => {
+export const passwordChanged22 = (text) => {
     return{
         type: 'password_changed2',
         payload: text
@@ -257,42 +362,7 @@ export const ChangePassForgot = ({Id,password,password2}) => {
   };
 };
 
-export const signupUser = ({Name, email,password,password2}) => {
-    
-    return (dispatch) => {
-    dispatch({type: 'Login_user'});
 
-    if(email == '' || password=='' || password2=='' || Name =='' || typeof email == 'undefined' || typeof password == 'undefined' || typeof Name == 'undefined' || typeof password2 == 'undefined' ){
-        dispatch({type: 'LoginUserFail', payload: "Empty Field"});
-    }
-    
-    else{
-        
-    fetch('http://'+IP+':80/GGfiles/Ap/Signup.php', {
-    method: 'POST',
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-        Name: Name,
-        email: email,
-        password: password,
-        password2: password2,
-    }),
-    }).then((response) => response.json()).then(users => {
-        
-   if( typeof users.Id != 'undefined'){
-       dispatch({type: 'LoginUserDone', payload: users});
-    }
-   else{
-      dispatch({type: 'LoginUserFail', payload: users});
-    }
-    
-    });
-   }
-  };
-};
 
 
 

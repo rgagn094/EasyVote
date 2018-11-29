@@ -63,8 +63,8 @@ class Twofactorform extends Component {
         <View>
        
         <View style = {styles.viewStyle}>
-        <Text>Enter the 6 digit Verification </Text>
-        <Text>Code sent to your email</Text>
+        <Text style={{alignSelf:'center',fontSize:25, color:'#1f3f54'}}>Enter the 6 digit Verification </Text>
+        <Text style={{alignSelf:'center',fontSize:25,color:'#1F3F54'}}>Code sent to your email</Text>
         </View>
 
         
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     },
     viewStyle: {
        // height: '100%',
-       marginTop: '20%',
+       marginBottom: '20%',
         width: '100%',
     },
    
