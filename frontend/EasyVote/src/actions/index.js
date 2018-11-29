@@ -189,7 +189,7 @@ export const FirstNameChanged = (text) => {
                             dispatch({type: 'Login_user'});
                         
                             
-                            fetch('http://'+IP+':80/GGfiles/Ap/delacoo.php', {
+                            fetch('http://127.0.0.1:8000/election/list', {
                             method: 'POST',
                             headers: {
                                 'Accept': 'application/json',
@@ -198,13 +198,10 @@ export const FirstNameChanged = (text) => {
                             body: JSON.stringify({
                                  
                               }),
-                            }).then((response) => response.json()).then(users => {
-                           if( typeof users.Id != 'undefined'){
-                               dispatch({type: 'LoginUserDone', payload: users});
-                            }
-                           else{
-                              dispatch({type: 'LoginUserFail', payload: users});
-                            }
+                            }).then((response) => response.json()).then(Elections => {
+                          
+                               dispatch({type: 'Elections', payload: Elections});
+                            
                             
                             });
                            

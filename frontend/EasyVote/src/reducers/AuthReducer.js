@@ -58,6 +58,8 @@ export default (state = INITIAL_STATE , action) => {
     case 'LastFour_changed': 
         return {...state, fourD: action.payload};
 
+    case 'Elections':  
+        return {...state, Elections: action.payload};
 
 
 
@@ -65,8 +67,12 @@ export default (state = INITIAL_STATE , action) => {
 
 
 
-    case 'password_changed3':  
-        return {...state, ID2: action.payload};
+
+
+
+
+
+
 
     case 'code_changed2': 
         return {...state,codetwo : action.payload};

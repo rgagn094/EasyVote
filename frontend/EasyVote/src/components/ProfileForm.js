@@ -59,18 +59,7 @@ class ProfileForm extends Component {
   getProfiles(){
     return  this.props.elections;
   }
-    componentDidMount(){
-        fetch('http://127.0.0.1:8000/election/list', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-        }).then((response) => {
-            this.setState({'elections': response.foundData});
-        })
-
-    }
+    
 
   renderRow(item){
     return <Text /*navigate={this.state.nav}*/>
@@ -129,7 +118,7 @@ const styles = StyleSheet.create({
 
   const mapStateToProps = state =>{
   
-    const elections = _.map(state.pro.SubsS,(Val,uid) =>{
+    const elections = _.map(state.auth.Elections,(Val,uid) =>{
       return {...Val};
     });
   

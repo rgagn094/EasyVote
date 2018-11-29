@@ -18,7 +18,7 @@ import {
 
 class Twofactorform extends Component {
 
-      
+ 
 
      onEmailChanged(text){
         this.props.emailChanged(text);
