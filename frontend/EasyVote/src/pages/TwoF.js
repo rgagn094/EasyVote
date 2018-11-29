@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Twofactorform from '.././components/Twofactorform';
-//import {Provider} from 'react-redux';
-//import{createStore, applyMiddleware} from 'redux';
-//import ReduxThunk from 'redux-thunk'
-//import reducers from '../reducers'
+// import {Provider} from 'react-redux';
+// import{createStore, applyMiddleware} from 'redux';
+
 import {
   Platform,
   StyleSheet,
@@ -14,6 +13,10 @@ import {
   SafeAreaView,
   Keyboard
 } from 'react-native';
+import {applyMiddleware, createStore} from "redux";
+import reducers from "../reducers";
+import ReduxThunk from "redux-thunk";
+import Provider from "react-redux/es/components/Provider";
 
 
 
@@ -24,8 +27,9 @@ export default class TwoF extends Component {
   render() {
     const{navigation} = this.props;
     return (
-    
+        <Provider store={createStore(reducers, {},applyMiddleware(ReduxThunk))}>
         <Twofactorform navigation={navigation}/>
+        </Provider>
     
     );
   }
