@@ -106,7 +106,7 @@ router.post('/register', [
 	let address = {addressLine, city, state, postalCode,country,stateCode,countryCode};
 	let phone = {number,areaCode};
 	let demographics = {gender,birthDate,address};
-	let electionBody = electionBodyID
+	let electionBody = electionBodyID;
 	
 
 	//create new instance of user
@@ -132,7 +132,7 @@ router.post('/register', [
 
 
 
-})
+});
 
 /*
 
@@ -147,7 +147,7 @@ router.get('/list', (req,res)=>{
 	}).catch((err)=>{ //catch errors
 		console.log({error: err}) //print errors to console
 	})
-})
+});
 
 
 /*

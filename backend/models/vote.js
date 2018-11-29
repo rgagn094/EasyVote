@@ -7,7 +7,13 @@ Schema for a vote
 VoteSchema = new Schema({
   hashedID: {  //hashed user ID of voter
     type: String,
-    required: true
+    required: true,
+    unique: true
+  },
+  authenticated: {
+    type: Boolean,
+    required: true,
+    default: false
   },
   candidate: { //Candidate the voter has chosen
     type: String,
