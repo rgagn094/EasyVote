@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {FormInput,Card,FormButton,HomeHeader2,Spinner,ForwardButton} from './index';
-//import {connect} from 'react-redux';
+import {connect} from 'react-redux';
 import {emailChanged,authcheck} from '../actions';
 import { AsyncStorage } from "react-native"
 import {

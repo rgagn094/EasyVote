@@ -76,7 +76,7 @@ export const FirstNameChanged = (text) => {
                         //     
                         //     else{
                                 
-                            fetch('http://127.0.0.1:8000/login', {
+                            fetch('http://127.0.0.1:8000/user/login', {
                             method: 'POST',
                             headers: {
                                 'Accept': 'application/json',
@@ -85,15 +85,15 @@ export const FirstNameChanged = (text) => {
                             body: JSON.stringify({
                             email: email,
                             password:password,
-
-                            }),
+                            verificationMethod: 1
+                                                        }),
                             }).then((response) =>{
                                 
                            if( response.message){
                                dispatch({type: 'LoginUserDone', payload: response.message});
                             }
                            else{
-                              dispatch({type: 'LoginUserFail', payload: response.errors});
+                              dispatch({type: 'LoginUserDone', payload: response.errors});
                             }
                             
                             });

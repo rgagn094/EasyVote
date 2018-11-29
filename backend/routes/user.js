@@ -50,7 +50,7 @@ router.post('/login', async (req,res)=>{ //use of javascript async/await for syn
         //Verify user with 2FA via email or phone
 		if (verificationMethod === 0){ //send pin through email
 
-		}else if(verificationMethod === 1){ //send pin through phone
+		}else if(verificationMethod == 1){ //send pin through phone
 			//check if phone number exist
 			if (!(user.phone.number && user.phone.areaCode)) {
             	return res.send({error:"User does not have a valid phone"})
