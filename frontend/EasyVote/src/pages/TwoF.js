@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ProfileEditForm from '.././components/ProfileEditForm';
+import Twofactorform from '.././components/Twofactorform';
 //import {Provider} from 'react-redux';
 //import{createStore, applyMiddleware} from 'redux';
 //import ReduxThunk from 'redux-thunk'
@@ -19,13 +19,13 @@ import {
 
 
 
-export default class ProfileEdit extends Component {
+export default class TwoF extends Component {
   static navigationOptions = { header: null };
   render() {
     const{navigation} = this.props;
     return (
     
-        <ProfileEditForm navigation={navigation}/>
+        <Twofactorform navigation={navigation}/>
     
     );
   }

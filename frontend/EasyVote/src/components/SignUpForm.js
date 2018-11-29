@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {FormInput,Card,FormButton,HomeHeader2,Spinner,ForwardButton} from './index';
-//import {connect} from 'react-redux';
-//import {emailChanged,passwordChanged,loginUser} from '../actions';
+import {connect} from 'react-redux';
+import {emailChanged,passwordChanged,login} from '../actions';
 import { AsyncStorage } from "react-native"
 import {
   Platform,
@@ -11,7 +11,8 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   SafeAreaView,
-  Keyboard
+  Keyboard,
+  Image
 } from 'react-native';
 
 
@@ -19,19 +20,19 @@ class SignUpForm extends Component {
 
       
 
-    /* onEmailChanged(text){
+     onEmailChanged(text){
         this.props.emailChanged(text);
     }
     
     onPasswordChanged(text){
         this.props.passwordChanged(text);
-     } */
+     } 
 
-    /* onButtonPress(){
+     onButtonPress(){
        const {email,password} = this.props;
-      this.props.loginUser({email,password});
+      this.props.login({email,password});
       
-     }*/
+     }
 
    /* renderError(){
     if(this.props.error){
@@ -55,18 +56,22 @@ class SignUpForm extends Component {
   render() {
     //const {vall} = this.props;
     return (
-    <SafeAreaView >
+    <SafeAreaView style ={{width:'100%', height:'100%', backgroundColor:'white'}} >
      <HomeHeader2 navigate={this.props.navigation.goBack}/>
       <KeyboardAvoidingView style={{width:'90%',margin:'5%',marginTop:'30%'}} behavior = {(Platform.OS === 'ios') ? 'position' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
        
         <View style = {styles.viewStyle}>
-        <Text style = {{ alignSelf:'center', marginBottom:'20%', fontSize: 40}}>Easy Vote</Text>
+        <Image
+                style={{height: 100, alignSelf:'center', width:100, marginRight:15,}}
+                source={require('../.././images/logoicon.png')}
+                resizeMode = 'contain'
+                />
         </View>
 
         <Card>
-        <FormInput /*val={this.props.email} ct={this.onEmailChanged.bind(this)}*/  bool = {false} ph = {"Email"}/>
+        <FormInput val={this.props.email} ct={this.onEmailChanged.bind(this)}  bool = {false} ph = {"Email"}/>
         </Card>
         
         
@@ -75,12 +80,12 @@ class SignUpForm extends Component {
        
 
         <Card>
-        <FormInput /*val={this.props.email} ct={this.onEmailChanged.bind(this)}*/  bool = {false} ph = {"Input Password"}/>
+        <FormInput val={this.props.password} ct={this.onPasswordChanged.bind(this)}  bool = {true} ph = {"Input Password"}/>
         </Card>
         
        {/* </View> */}
        <View >
-      <ForwardButton press = {this.props.navigation.navigate}/>
+      <ForwardButton press={this.onButtonPress.bind(this)} place ={'TwoF'}/>
        
        </View>
        </View>
@@ -115,4 +120,14 @@ const styles = StyleSheet.create({
     
   });
 
-  export default SignUpForm;
+
+  const mapStateToProps = state =>{
+    return{
+       email: state.auth.email,
+       password: state.auth.password,
+       }
+};
+
+export default connect(mapStateToProps,{emailChanged,passwordChanged,login})(SignUpForm) ;
+
+ 

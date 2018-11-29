@@ -1,5 +1,6 @@
 export * from './FormInput';
 export * from './Card';
+export * from './Card2';
 export * from './Link';
 export * from './Spinner';
 export * from './FormButton';

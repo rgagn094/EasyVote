@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import {Text} from 'react-native';
 import {HeaderSet} from './index';
+
 //import {connect} from 'react-redux';
 //import {emailChanged,passwordChanged,loginUser} from '../actions';
 import { AsyncStorage } from "react-native"
@@ -18,57 +20,23 @@ class ProfileForm extends Component {
   constructor(props) {
     super(props);
   this.state = {
-    profiles: [
-      {
-        Name: "Donald Trump",
-        Party: "Republican",
-        Age:24
-
-      }, 
-     {
-      Name: "Nasty Woman",
-      Party: "Democrats",
-      Age:24
-        
-      },
-      {
-        Name: "Donald Trump",
-        Party: "Republican",
-        Age:24
-
-      }, 
-     {
-      Name: "Nasty Woman",
-      Party: "Democrats",
-      Age:24
-        
-      },
-      {
-        Name: "Donald Trump",
-        Party: "Republican",
-        Age:24
-
-      }, 
-     {
-      Name: "Nasty Woman",
-      Party: "Democrats",
-      Age:24
-        
-      },
-      {
-        Name: "Donald Trump",
-        Party: "Republican",
-        Age:24
-      }, 
-     {
-      Name: "Nasty Woman",
-      Party: "Democrats",
-      Age:24
-      } 
+    elections: [
   ],
 }
   }
-  
+
+  componentDidMount(){
+      fetch('http://127.0.0.1:8000/election/list', {
+          method: 'GET',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+          },
+      }).then((response) => {
+          this.setState({'elections': response.foundData});
+      })
+
+  }
 
     /* onEmailChanged(text){
         this.props.emailChanged(text);
@@ -95,11 +63,13 @@ class ProfileForm extends Component {
   } */
 
   getProfiles(){
-    return  this.state.profiles;
+    return  this.state.elections;
   }
 
   renderRow(item){
-    return <ProfileHome /*navigate={this.state.nav}*/item={item}/>
+    return <Text /*navigate={this.state.nav}*/>
+      {item.Name}
+          </Text>
    }
 
   renderButton(){ 
@@ -112,7 +82,7 @@ class ProfileForm extends Component {
     });
     this.dataSource = ds.cloneWithRows(this.getProfiles())
      return <ListView
-     horizontal={true}
+    // horizontal={true}
      style={{width:'90%',marginTop:'10%'}}
      dataSource={this.dataSource}
      enableEmptySections = {true}
@@ -125,8 +95,8 @@ class ProfileForm extends Component {
   render() {
     //const {vall} = this.props;
     return (
-    <SafeAreaView style={{width:'100%', height:'100%', alignItems:'center', marginTop:'5%'}}>
-    <HeaderSet/>
+    <SafeAreaView style={{width:'100%', height:'100%',backgroundColor:'white',alignItems:'center', marginTop:'5%'}}>
+    <HeaderSet place2={'ProfileEdit'} press = {this.props.navigation.navigate} place ={'SettingsEdit'}/>
       {this.renderButton()}
       </SafeAreaView>
       );

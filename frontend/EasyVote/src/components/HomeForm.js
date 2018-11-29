@@ -11,6 +11,7 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   SafeAreaView,
+  Image,
   Keyboard
 } from 'react-native';
 
@@ -55,12 +56,17 @@ class HomeForm extends Component {
   render() {
     //const {vall} = this.props;
     return (
-    <SafeAreaView style={{width:'80%',margin:'5%', height:'100%',alignSelf:'center', marginTop:'40%'}}>
-      <KeyboardAvoidingView  behavior = {(Platform.OS === 'ios') ? 'position' : 'height'}>
+    <SafeAreaView style={{backgroundColor: 'white',width:'100%', height:'100%',alignSelf:'center'}}>
+      <KeyboardAvoidingView style={{marginTop:'20%',width:'100%',}}  behavior = {(Platform.OS === 'ios') ? 'position' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
         <View style = {styles.viewStyle}>
-        <Text style = {{ alignSelf:'center', fontSize: 40}}>Easy Vote</Text>
+        {/* <Text style = {{ alignSelf:'center', fontSize: 40}}>Easy Vote</Text> */}
+        <Image
+                style={{height: 200, width:300, marginRight:15,}}
+                source={require('../.././images/logo.jpeg')}
+                resizeMode = 'contain'
+                />
         </View>
 
         
@@ -98,6 +104,8 @@ const styles = StyleSheet.create({
        // height: '100%',
        marginTop: '50%',
         width: '100%',
+        alignItems:'center',
+       // borderWidth:1,
     },
    
     

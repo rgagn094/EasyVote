@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {FormInput,Card,FormButton,HomeHeader2,Spinner,ForwardButton} from './index';
 //import {connect} from 'react-redux';
-//import {emailChanged,passwordChanged,loginUser} from '../actions';
+import {emailChanged,authcheck} from '../actions';
 import { AsyncStorage } from "react-native"
 import {
   Platform,
@@ -11,27 +11,26 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   SafeAreaView,
-  Keyboard
+  Keyboard,
+  Image
 } from 'react-native';
 
 
-class SecForm extends Component {
+class Twofactorform extends Component {
 
       
 
-    /* onEmailChanged(text){
+     onEmailChanged(text){
         this.props.emailChanged(text);
     }
     
-    onPasswordChanged(text){
-        this.props.passwordChanged(text);
-     } */
+   
 
-    /* onButtonPress(){
-       const {email,password} = this.props;
-      this.props.loginUser({email,password});
+     onButtonPress(){
+       const {email} = this.props;
+      this.props.authcheck({email});
       
-     }*/
+     }
 
    /* renderError(){
     if(this.props.error){
@@ -55,33 +54,31 @@ class SecForm extends Component {
   render() {
     //const {vall} = this.props;
     return (
-    <SafeAreaView style={{backgroundColor:'white', height:'100%'}} >
-    <HomeHeader2 navigate={this.props.navigation.goBack}/>
-      <KeyboardAvoidingView style={{width:'90%',margin:'5%',marginTop:'30%'}}  behavior = {(Platform.OS === 'ios') ? 'position' : 'height'}>
+    <SafeAreaView style ={{width:'100%', height:'100%', backgroundColor:'white'}} >
+     <HomeHeader2 navigate={this.props.navigation.goBack}/>
+      <KeyboardAvoidingView style={{width:'90%',margin:'5%',marginTop:'30%'}} behavior = {(Platform.OS === 'ios') ? 'position' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
+       
         <View style = {styles.viewStyle}>
-        <Text style = {{ alignSelf:'flex-start', fontSize: 19}}>Enter Drivers License Number</Text>
+        <Text style={{alignSelf:'center',fontSize:25, color:'#1f3f54'}}>Enter the 6 digit Verification </Text>
+        <Text style={{alignSelf:'center',fontSize:25,color:'#1F3F54'}}>Code sent to your email</Text>
         </View>
 
-        <Card>
-        <FormInput /*val={this.props.email} ct={this.onEmailChanged.bind(this)}*/  bool = {false} ph = {"Drivers License"}/>
-        </Card>
+        
         
         
         
         {/* <View style={{height: 40, alignItems:'center', alignSelf: 'center', width: "100%"}}> */}
-        <View style = {styles.viewStyle}>
-        <Text style = {{ alignSelf:'flex-start', fontSize: 19}}>Last 4 Digits of SIN</Text>
-        </View>
+       
 
         <Card>
-        <FormInput /*val={this.props.email} ct={this.onEmailChanged.bind(this)}*/  bool = {false} ph = {"Input last 4 Digits of SIN"}/>
+        <FormInput val={this.props.email} ct={this.onEmailChanged.bind(this)}  bool = {false} ph = {"Input Password"}/>
         </Card>
         
        {/* </View> */}
        <View >
-      <ForwardButton press = {this.props.navigation.navigate} place ={'Profile'}/>
+      <ForwardButton press={this.onButtonPress.bind(this)} place ={'Profile'}/>
        
        </View>
        </View>
@@ -109,11 +106,21 @@ const styles = StyleSheet.create({
     },
     viewStyle: {
        // height: '100%',
-       marginTop: 40,
+       marginBottom: '20%',
         width: '100%',
     },
    
     
   });
 
-  export default SecForm;
+
+
+
+  const mapStateToProps = state =>{
+    return{
+       email: state.auth.email,
+      
+       }
+};
+
+export default connect(mapStateToProps,{emailChanged,authcheck})(Twofactorform) ;

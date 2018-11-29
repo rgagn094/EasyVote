@@ -11,7 +11,8 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   SafeAreaView,
-  Keyboard
+  Keyboard,
+  Image
 } from 'react-native';
 
 
@@ -55,12 +56,18 @@ class LogOrSignForm extends Component {
   render() {
     //const {vall} = this.props;
     return (
-    <SafeAreaView style={{width:'80%',margin:'5%', height:'100%',alignSelf:'center'}}>
+    <SafeAreaView style={{width:'100%',backgroundColor: 'white', height:'100%',alignSelf:'center'}}>
       <KeyboardAvoidingView  behavior = {(Platform.OS === 'ios') ? 'position' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={{height:'100%'}}>
         <View style = {styles.viewStyle}>
-        <Text style = {{ alignSelf:'center', fontSize: 40}}>Easy Vote</Text>
+        
+        <Image
+                style={{height: 200, alignSelf:'center', width:300, marginRight:15,}}
+                source={require('../.././images/logo.jpeg')}
+                resizeMode = 'contain'
+                />
+       
         </View>
 
         
