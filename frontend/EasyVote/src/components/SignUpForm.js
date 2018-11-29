@@ -11,7 +11,8 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   SafeAreaView,
-  Keyboard
+  Keyboard,
+  Image
 } from 'react-native';
 
 
@@ -55,14 +56,18 @@ class SignUpForm extends Component {
   render() {
     //const {vall} = this.props;
     return (
-    <SafeAreaView >
+    <SafeAreaView style ={{width:'100%', height:'100%', backgroundColor:'white'}} >
      <HomeHeader2 navigate={this.props.navigation.goBack}/>
       <KeyboardAvoidingView style={{width:'90%',margin:'5%',marginTop:'30%'}} behavior = {(Platform.OS === 'ios') ? 'position' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
        
         <View style = {styles.viewStyle}>
-        <Text style = {{ alignSelf:'center', marginBottom:'20%', fontSize: 40}}>Easy Vote</Text>
+        <Image
+                style={{height: 100, alignSelf:'center', width:100, marginRight:15,}}
+                source={require('../.././images/logoicon.png')}
+                resizeMode = 'contain'
+                />
         </View>
 
         <Card>
@@ -80,7 +85,7 @@ class SignUpForm extends Component {
         
        {/* </View> */}
        <View >
-      <ForwardButton press = {this.props.navigation.navigate}/>
+      <ForwardButton press = {this.props.navigation.navigate} place ={'TwoF'}/>
        
        </View>
        </View>

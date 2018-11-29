@@ -2,11 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 var candidateSchema = new Schema({
-    candidateID: {  //Reference to the user that cast the vote
-        type: Schema.Types.ObjectId,
-        ref: 'ElectionBody',
-        required: true
-    },
+
     firstName: {//Candidate's legal first name
         type: String,
         required: true,
@@ -43,12 +39,12 @@ ElectionSchema = new Schema({
     },
     startDate: {  //start date of voting for election
         type: Date,
-        required: true,
+        //required: true,
         default: Date.now()
     },
     expiryDate: { //end date of voting for election
         type: Date,
-        required: true,
+        //required: true,
         default: Date.now(),
         validate: [
             function (value) {  //Function to check if end date is later than start date

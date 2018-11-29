@@ -107,8 +107,8 @@ class ProfileEditForm extends Component {
   render() {
     //const {vall} = this.props;
     return (
-    <SafeAreaView style={{width:'100%', height:'100%', alignItems:'center', marginTop:'5%'}}>
-    <HomeHeader ti='Profile'/>
+    <SafeAreaView style={{width:'100%', height:'100%', backgroundColor:'white', alignItems:'center', marginTop:'5%'}}>
+    <HomeHeader navigate={this.props.navigation.goBack} ti='Profile'/>
     <View style={{width:'94%',borderWidth:1,borderRadius:20,marginBottom:30}}>
       <ProfileEditHome Name='Edit Profile' editImage='../.././images/profile.png'/>
     <ProfileEditHome Name='FAQ' editImage='../.././images/profile.png'/>  

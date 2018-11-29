@@ -39,10 +39,9 @@ router.post('/post/:electionBodyId', function(req,res){
                     console.log(err);
                     res.status(500).send();
                 }
-                else {
-                    res.send(election);
+                    res.status(200).send(election);
                     console.log("Data saved to database");
-                }
+
 
             });
         }

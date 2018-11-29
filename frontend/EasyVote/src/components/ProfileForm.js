@@ -125,8 +125,8 @@ class ProfileForm extends Component {
   render() {
     //const {vall} = this.props;
     return (
-    <SafeAreaView style={{width:'100%', height:'100%', alignItems:'center', marginTop:'5%'}}>
-    <HeaderSet/>
+    <SafeAreaView style={{width:'100%', height:'100%',backgroundColor:'white',alignItems:'center', marginTop:'5%'}}>
+    <HeaderSet place2={'ProfileEdit'} press = {this.props.navigation.navigate} place ={'SettingsEdit'}/>
       {this.renderButton()}
       </SafeAreaView>
       );

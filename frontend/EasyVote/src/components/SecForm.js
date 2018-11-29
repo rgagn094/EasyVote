@@ -55,7 +55,7 @@ class SecForm extends Component {
   render() {
     //const {vall} = this.props;
     return (
-    <SafeAreaView >
+    <SafeAreaView style={{backgroundColor:'white', height:'100%'}} >
     <HomeHeader2 navigate={this.props.navigation.goBack}/>
       <KeyboardAvoidingView style={{width:'90%',margin:'5%',marginTop:'30%'}}  behavior = {(Platform.OS === 'ios') ? 'position' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -81,7 +81,7 @@ class SecForm extends Component {
         
        {/* </View> */}
        <View >
-      <ForwardButton/>
+      <ForwardButton press = {this.props.navigation.navigate} place ={'Profile'}/>
        
        </View>
        </View>

@@ -32,4 +32,6 @@ const styles = StyleSheet.create({
    
 });
 
-export {ForwardButton};
+export {ForwardButton}; 
+
+//project comp arch,presentaion comp arch, photo's,econs assignment,asto assignment,quiz study, 

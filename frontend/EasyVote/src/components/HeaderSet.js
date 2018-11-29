@@ -5,7 +5,7 @@ const HeaderSet = (props) =>{
     return(
     <View style={styles.viewStyle}>
 
-    <TouchableOpacity style={{ justifyContent:'flex-start'}}> 
+    <TouchableOpacity  onPress={() =>{props.press(props.place2)}}  style={{ justifyContent:'flex-start'}}> 
          <Image style={{height: 40, width:40,alignSelf:"center",alignItems:"center"}}
             source={require('../.././images/profile.png')}
             resizeMode = 'contain'/>
@@ -14,7 +14,7 @@ const HeaderSet = (props) =>{
 
          
 
-    <TouchableOpacity style={{justifyContent:'flex-start'}}> 
+    <TouchableOpacity onPress={() =>{props.press(props.place)}}  style={{justifyContent:'flex-start'}}> 
          <Image style={{height: 40, width:40}}
             source={require('../.././images/settings.png')}
             resizeMode = 'contain'/>
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: '86%',
         height: '13%',
-        backgroundColor: 'white',
+       // backgroundColor: 'white',
     },
 
    
