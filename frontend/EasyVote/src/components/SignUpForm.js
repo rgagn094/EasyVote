@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {FormInput,Card,FormButton,HomeHeader2,Spinner,ForwardButton} from './index';
 import {connect} from 'react-redux';
-import {emailChanged,passwordChanged} from '../actions';
+import {emailChanged,passwordChanged,login} from '../actions';
 import { AsyncStorage } from "react-native"
 import {
   Platform,
@@ -28,11 +28,11 @@ class SignUpForm extends Component {
         this.props.passwordChanged(text);
      } 
 
-    /* onButtonPress(){
+     onButtonPress(){
        const {email,password} = this.props;
-      this.props.loginUser({email,password});
+      this.props.login({email,password});
       
-     }*/
+     }
 
    /* renderError(){
     if(this.props.error){
@@ -85,7 +85,7 @@ class SignUpForm extends Component {
         
        {/* </View> */}
        <View >
-      <ForwardButton press = {this.props.navigation.navigate} place ={'TwoF'}/>
+      <ForwardButton press={this.onButtonPress.bind(this)} place ={'TwoF'}/>
        
        </View>
        </View>
@@ -128,6 +128,6 @@ const styles = StyleSheet.create({
        }
 };
 
-export default connect(mapStateToProps,{emailChanged,passwordChanged})(SignUpForm) ;
+export default connect(mapStateToProps,{emailChanged,passwordChanged,login})(SignUpForm) ;
 
  

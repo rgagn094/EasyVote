@@ -66,6 +66,46 @@ export const FirstNameChanged = (text) => {
                     };
                 };
 
+                export const login = ({email,password}) => {
+                     return (dispatch) => {
+                            dispatch({type: 'Login_user'});
+                        
+                            if(email == '' || password=='' || password2=='' || Name =='' || typeof email == 'undefined' || typeof password == 'undefined' || typeof Name == 'undefined' || typeof password2 == 'undefined' ){
+                                dispatch({type: 'LoginUserFail', payload: "Empty Field"});
+                            }
+                            
+                            else{
+                                
+                            fetch('http://'+IP+':80/GGfiles/Ap/Signup.php', {
+                            method: 'POST',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                            firstName: FirstName,
+                            lastName:LastName,
+                            number:number,
+                                email: email,
+                                password: password,
+                                password2: password2,
+                        licence:Licence,
+                        SIN:fourD
+                            }),
+                            }).then((response) => response.json()).then(users => {
+                                
+                           if( typeof users.Id != 'undefined'){
+                               dispatch({type: 'LoginUserDone', payload: users});
+                            }
+                           else{
+                              dispatch({type: 'LoginUserFail', payload: users});
+                            }
+                            
+                            });
+                           }
+                          };
+                        };
+
       
 
                 export const Signup = ({FirstName,LastName,number,email,password,password2,Licence,fourD}) => {
