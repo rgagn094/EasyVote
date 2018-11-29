@@ -113,13 +113,13 @@ export const FirstNameChanged = (text) => {
                         return (dispatch) => {
                         dispatch({type: 'Login_user'});
                     
-                        if(email == '' || password=='' || password2=='' || Name =='' || typeof email == 'undefined' || typeof password == 'undefined' || typeof Name == 'undefined' || typeof password2 == 'undefined' ){
-                            dispatch({type: 'LoginUserFail', payload: "Empty Field"});
-                        }
-                        
-                        else{
+                    //     if(email == '' || password=='' || password2=='' || fi =='' || typeof email == 'undefined' || typeof password == 'undefined' || typeof Name == 'undefined' || typeof password2 == 'undefined' ){
+                    //         dispatch({type: 'LoginUserFail', payload: "Empty Field"});
+                    //     }
+                    //     
+                    //     else{
                             
-                        fetch('http://'+IP+':80/GGfiles/Ap/Signup.php', {
+                        fetch('http://127.0.0.1:8000/user/register', {
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',
@@ -135,18 +135,19 @@ export const FirstNameChanged = (text) => {
                     licence:Licence,
                     SIN:fourD
                         }),
-                        }).then((response) => response.json()).then(users => {
+                        }).then((response) => response.json()).then(response => {
                             
-                       if( typeof users.Id != 'undefined'){
-                           dispatch({type: 'LoginUserDone', payload: users});
+                       if(response.user){
+                           let users = response.user;
+                           dispatch({type: 'LoginUserDone', payload: users});
                         }
                        else{
-                          dispatch({type: 'LoginUserFail', payload: users});
+                          dispatch({type: 'LoginUserFail', payload: response.errors});
                         }
                         
                         });
                        }
-                      };
+                     // };
                     };
 
                 
