@@ -18,7 +18,8 @@ var candidateSchema = new Schema({
         lowercase: true,
     },
     image: {	//Any other legal names
-        //TODO
+        type: String,
+        required: true,
     },
     description: {
         type: String,

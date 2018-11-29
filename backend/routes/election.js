@@ -7,23 +7,29 @@ const Election = require('../models/election');
 Create an election
 */
 
+
 router.post('/', function(req,res){
     console.log("Received Post new election request...");
 
     var newElection = new Election();
 
     newElection.title = req.body.title;
-    //newElection.candidates = req.body.candidates;
-    //newElection.startDate = req.body.startDate;
-    //newElection.expiryDate = req.body.expiryDate;
+    newElection.candidates = req.body.candidates;//List of candidates and their details
+    newElection.startDate = req.body.startDate;
+    newElection.expiryDate = req.body.expiryDate;
+    newElection.image = req.body.image;
+
 
     newElection.save(function(err, election){
         if(err){
             console.log(err);
             res.status(500).send();
         }
-        res.send(election);
-        console.log("Data saved to database");
+        else{
+            res.send(election);
+            console.log("Data saved to database");
+        }
+
     });
 });
 
@@ -33,7 +39,7 @@ Get an election
 */
 
 router.get('/:electionId', function(req,res){
-    console.log("Received get by ID request");
+    console.log("Received get specific election");
 
     Election.findById(req.params.electionId, function(err,foundDoc){
         if(err){
