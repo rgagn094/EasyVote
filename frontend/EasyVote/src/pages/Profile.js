@@ -22,10 +22,10 @@ import {
 export default class Profile extends Component {
   static navigationOptions = { header: null };
   render() {
-    
+    const{navigation} = this.props;
     return (
     
-        <ProfileForm/>
+        <ProfileForm navigation={navigation}/>
     
     );
   }

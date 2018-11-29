@@ -107,8 +107,8 @@ class SettingsEditForm extends Component {
   render() {
     //const {vall} = this.props;
     return (
-    <SafeAreaView style={{width:'100%', height:'100%', alignItems:'center', marginTop:'5%'}}>
-    <HomeHeader ti='Settings'/>
+    <SafeAreaView style={{width:'100%', height:'100%',backgroundColor:'white', alignItems:'center', marginTop:'5%'}}>
+    <HomeHeader navigate={this.props.navigation.goBack} ti='Settings'/>
     <View style={{width:'94%',borderWidth:1,borderRadius:20,marginBottom:30}}>
       <ProfileEditHome Name='How To Vote' editImage='../.././images/profile.png'/>
     <ProfileEditHome Name='Get Help' editImage='../.././images/profile.png'/>  

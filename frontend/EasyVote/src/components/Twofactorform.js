@@ -11,11 +11,12 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   SafeAreaView,
-  Keyboard
+  Keyboard,
+  Image
 } from 'react-native';
 
 
-class LoginForm extends Component {
+class Twofactorform extends Component {
 
       
 
@@ -55,37 +56,31 @@ class LoginForm extends Component {
   render() {
     //const {vall} = this.props;
     return (
-    <SafeAreaView style={{backgroundColor:'white', height:'100%'}}>
-    <HomeHeader2 navigate={this.props.navigation.goBack}/>
-      <KeyboardAvoidingView style={{width:'90%',margin:'5%',marginTop:'30%',marginBottom:'0%'}}  behavior = {(Platform.OS === 'ios') ? 'position' : 'height'}>
+    <SafeAreaView style ={{width:'100%', height:'100%', backgroundColor:'white'}} >
+     <HomeHeader2 navigate={this.props.navigation.goBack}/>
+      <KeyboardAvoidingView style={{width:'90%',margin:'5%',marginTop:'30%'}} behavior = {(Platform.OS === 'ios') ? 'position' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
+       
         <View style = {styles.viewStyle}>
-        <Text style = {{ alignSelf:'flex-start', fontSize: 19}}>Type your full name</Text>
+        <Text>Enter the 6 digit Verification </Text>
+        <Text>Code sent to your email</Text>
         </View>
 
-        <Card>
-        <FormInput /*val={this.props.email} ct={this.onEmailChanged.bind(this)}*/  bool = {false} ph = {"First Name"}/>
-        </Card>
-        <Card>
-        <FormInput /*val={this.props.password} /* ct={this.onPasswordChanged.bind(this)} */  bool = {true} ph = {"Last Name"}/>
-        </Card>
+        
+        
         
         
         {/* <View style={{height: 40, alignItems:'center', alignSelf: 'center', width: "100%"}}> */}
-        <View style = {styles.viewStyle}>
-        <Text style = {{ alignSelf:'flex-start', fontSize: 19}}>Create Password</Text>
-        </View>
+       
 
         <Card>
         <FormInput /*val={this.props.email} ct={this.onEmailChanged.bind(this)}*/  bool = {false} ph = {"Input Password"}/>
         </Card>
-        <Card>
-        <FormInput /*val={this.props.password} /* ct={this.onPasswordChanged.bind(this)} */  bool = {true} ph = {"Confirm Password"}/>
-        </Card>
+        
        {/* </View> */}
        <View >
-      <ForwardButton press = {this.props.navigation.navigate} place ={'Security'}/>
+      <ForwardButton press = {this.props.navigation.navigate} place ={'Profile'}/>
        
        </View>
        </View>
@@ -110,15 +105,14 @@ const styles = StyleSheet.create({
       backgroundColor: '#F4F2F3',
       width: '100%',
 
-
     },
     viewStyle: {
        // height: '100%',
-       marginTop: 20,
+       marginTop: '20%',
         width: '100%',
     },
    
     
   });
 
-  export default LoginForm;
+  export default Twofactorform;
