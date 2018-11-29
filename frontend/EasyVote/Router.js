@@ -8,17 +8,20 @@ import Profile from './src/pages/Profile';
 import Security from './src/pages/Security';
 import ProfileEdit from './src/pages/ProfileEdit';
 import SignUp from './src/pages/SignUp';
+import TwoF from './src/pages/TwoF';
 
 
 export const Router = StackNavigator({
    // Home:{ screen: Home},
     LogOrSign:{screen:LogOrSign},
     SignUp:{screen:SignUp},
+    TwoF:{screen:TwoF},
     Login: { screen: Login },
     Security:{screen:Security},
     Profile:{screen:Profile},
     SettingsEdit:{screen:SettingsEdit},
     ProfileEdit:{screen:ProfileEdit},
+   
     
    
 },

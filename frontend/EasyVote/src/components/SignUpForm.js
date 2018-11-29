@@ -85,7 +85,7 @@ class SignUpForm extends Component {
         
        {/* </View> */}
        <View >
-      <ForwardButton press = {this.props.navigation.navigate} place ={'Profile'}/>
+      <ForwardButton press = {this.props.navigation.navigate} place ={'TwoF'}/>
        
        </View>
        </View>
