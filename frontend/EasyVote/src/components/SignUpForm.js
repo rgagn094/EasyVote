@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {FormInput,Card,FormButton,HomeHeader2,Spinner,ForwardButton} from './index';
-//import {connect} from 'react-redux';
-//import {emailChanged,passwordChanged,loginUser} from '../actions';
+import {connect} from 'react-redux';
+import {emailChanged,passwordChanged} from '../actions';
 import { AsyncStorage } from "react-native"
 import {
   Platform,
@@ -20,13 +20,13 @@ class SignUpForm extends Component {
 
       
 
-    /* onEmailChanged(text){
+     onEmailChanged(text){
         this.props.emailChanged(text);
     }
     
     onPasswordChanged(text){
         this.props.passwordChanged(text);
-     } */
+     } 
 
     /* onButtonPress(){
        const {email,password} = this.props;
@@ -71,7 +71,7 @@ class SignUpForm extends Component {
         </View>
 
         <Card>
-        <FormInput /*val={this.props.email} ct={this.onEmailChanged.bind(this)}*/  bool = {false} ph = {"Email"}/>
+        <FormInput val={this.props.email} ct={this.onEmailChanged.bind(this)}  bool = {false} ph = {"Email"}/>
         </Card>
         
         
@@ -80,7 +80,7 @@ class SignUpForm extends Component {
        
 
         <Card>
-        <FormInput /*val={this.props.email} ct={this.onEmailChanged.bind(this)}*/  bool = {false} ph = {"Input Password"}/>
+        <FormInput val={this.props.password} ct={this.onPasswordChanged.bind(this)}  bool = {true} ph = {"Input Password"}/>
         </Card>
         
        {/* </View> */}
@@ -120,4 +120,14 @@ const styles = StyleSheet.create({
     
   });
 
-  export default SignUpForm;
+
+  const mapStateToProps = state =>{
+    return{
+       email: state.auth.email,
+       password: state.auth.password,
+       }
+};
+
+export default connect(mapStateToProps,{emailChanged,passwordChanged})(SignUpForm) ;
+
+ 
