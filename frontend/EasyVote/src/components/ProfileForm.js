@@ -3,7 +3,7 @@ import {Text} from 'react-native';
 import {HeaderSet} from './index';
 
 //import {connect} from 'react-redux';
-//import {emailChanged,passwordChanged,loginUser} from '../actions';
+import {Fetchelection} from '../actions';
 import { AsyncStorage } from "react-native"
 import ProfileHome from './ProfileHome';
 import {
@@ -24,6 +24,14 @@ class ProfileForm extends Component {
   ],
 }
   }
+
+
+  componentDidMount(){
+    this.props.Fetchelection();
+
+  }
+
+
     /* onEmailChanged(text){
         this.props.emailChanged(text);
     }
@@ -49,7 +57,7 @@ class ProfileForm extends Component {
   } */
 
   getProfiles(){
-    return  this.state.elections;
+    return  this.props.elections;
   }
     componentDidMount(){
         fetch('http://127.0.0.1:8000/election/list', {
@@ -119,4 +127,14 @@ const styles = StyleSheet.create({
     
   });
 
-  export default ProfileForm;
+  const mapStateToProps = state =>{
+  
+    const elections = _.map(state.pro.SubsS,(Val,uid) =>{
+      return {...Val};
+    });
+  
+  
+  return {elections,loading:state.pro.loading1};
+  };
+
+export default connect(mapStateToProps,{Fetchelection})(ProfileForm) ;

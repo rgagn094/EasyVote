@@ -153,6 +153,45 @@ export const FirstNameChanged = (text) => {
 
 
 
+                    
+
+                    export const Fetchelection = () => {
+    
+                            return (dispatch) => {
+                            dispatch({type: 'Login_user'});
+                        
+                            
+                            fetch('http://'+IP+':80/GGfiles/Ap/delacoo.php', {
+                            method: 'POST',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                 
+                              }),
+                            }).then((response) => response.json()).then(users => {
+                           if( typeof users.Id != 'undefined'){
+                               dispatch({type: 'LoginUserDone', payload: users});
+                            }
+                           else{
+                              dispatch({type: 'LoginUserFail', payload: users});
+                            }
+                            
+                            });
+                           
+                          };
+                        };
+
+
+
+
+
+
+
+
+
+
 
 
 
