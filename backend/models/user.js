@@ -61,9 +61,12 @@ UserSchema = new Schema({
 			required: true,
 			default: Date.now()
 		},
-		lastAccessTime:{
+		lastAccessTime:{    //Last Date and time the user successfully logged onto the system
 			type: Date,
 			default: Date.now()
+		},
+		lastLoginAttempt: { //Last date and time the user attempted to Login (Login may not be successful due to failed password/token)
+			type: Date
 		},
 		lastAccessLocation: {
 			type: String,
