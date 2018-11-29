@@ -138,9 +138,9 @@ router.get('/find/:userID', (req,res)=>{
 		else {
 			res.send({error: "No user found"})
 		}
-		
+
 	}).catch((err)=>{
-		console.log(err); 
+		console.log(err);
 		res.send({error:err});
 	})
 });
@@ -148,7 +148,7 @@ router.get('/find/:userID', (req,res)=>{
 
 
 /*
-Register/Create a user 
+Register/Create a user
 */
 router.post('/register', [
 	check('email')
@@ -168,7 +168,7 @@ router.post('/register', [
 	/*
 		Get information from form
 	*/
-	let {	
+	let {
 		firstName,
 		lastName,
 		otherNames,
@@ -186,8 +186,8 @@ router.post('/register', [
 		stateCode,
 		countryCode,
 		number,
-		areaCode 
-		} = req.body; 
+		areaCode
+		} = req.body;
 
 
 	//Validation Check
@@ -196,7 +196,7 @@ router.post('/register', [
 		return res.send({errors:errors.array()});
 	}
 
-	//for development 
+	//for development
 	electionBodyID = new ObjectID(); //generates random id for electionbody
 	birthDate = new Date(); //generate random birthdate for user
 
@@ -213,8 +213,8 @@ router.post('/register', [
 	let address = {addressLine, city, state, postalCode,country,stateCode,countryCode};
 	let phone = {number,areaCode};
 	let demographics = {gender,birthDate,address};
-	let electionBody = electionBodyID
-	
+	let electionBody = electionBodyID;
+
 
 	//create new instance of user
 	let newUser = User({
@@ -259,7 +259,7 @@ list all users in the system
 router.get('/list', (req,res)=>{
 	User.find({}).exec().then((users)=>{
 		res.send({users}) //return users from database
-		
+
 	}).catch((err)=>{ //catch errors
 		console.log({error: err}) //print errors to console
 	})

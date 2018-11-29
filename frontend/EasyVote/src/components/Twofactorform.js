@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {FormInput,Card,FormButton,HomeHeader2,Spinner,ForwardButton} from './index';
 //import {connect} from 'react-redux';
-//import {emailChanged,passwordChanged,loginUser} from '../actions';
+import {emailChanged,authcheck} from '../actions';
 import { AsyncStorage } from "react-native"
 import {
   Platform,
@@ -20,19 +20,17 @@ class Twofactorform extends Component {
 
       
 
-    /* onEmailChanged(text){
+     onEmailChanged(text){
         this.props.emailChanged(text);
     }
     
-    onPasswordChanged(text){
-        this.props.passwordChanged(text);
-     } */
+   
 
-    /* onButtonPress(){
-       const {email,password} = this.props;
-      this.props.loginUser({email,password});
+     onButtonPress(){
+       const {email} = this.props;
+      this.props.authcheck({email});
       
-     }*/
+     }
 
    /* renderError(){
     if(this.props.error){
@@ -75,12 +73,12 @@ class Twofactorform extends Component {
        
 
         <Card>
-        <FormInput /*val={this.props.email} ct={this.onEmailChanged.bind(this)}*/  bool = {false} ph = {"Input Password"}/>
+        <FormInput val={this.props.email} ct={this.onEmailChanged.bind(this)}  bool = {false} ph = {"Input Password"}/>
         </Card>
         
        {/* </View> */}
        <View >
-      <ForwardButton press = {this.props.navigation.navigate} place ={'Profile'}/>
+      <ForwardButton press={this.onButtonPress.bind(this)} place ={'Profile'}/>
        
        </View>
        </View>
@@ -115,4 +113,14 @@ const styles = StyleSheet.create({
     
   });
 
-  export default Twofactorform;
+
+
+
+  const mapStateToProps = state =>{
+    return{
+       email: state.auth.email,
+      
+       }
+};
+
+export default connect(mapStateToProps,{emailChanged,authcheck})(Twofactorform) ;
