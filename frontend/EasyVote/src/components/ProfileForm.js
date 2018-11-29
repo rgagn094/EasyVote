@@ -24,20 +24,6 @@ class ProfileForm extends Component {
   ],
 }
   }
-
-  componentDidMount(){
-      fetch('http://127.0.0.1:8000/election/list', {
-          method: 'GET',
-          headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-          },
-      }).then((response) => {
-          this.setState({'elections': response.foundData});
-      })
-
-  }
-
     /* onEmailChanged(text){
         this.props.emailChanged(text);
     }
@@ -65,6 +51,18 @@ class ProfileForm extends Component {
   getProfiles(){
     return  this.state.elections;
   }
+    componentDidMount(){
+        fetch('http://127.0.0.1:8000/election/list', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }).then((response) => {
+            this.setState({'elections': response.foundData});
+        })
+
+    }
 
   renderRow(item){
     return <Text /*navigate={this.state.nav}*/>

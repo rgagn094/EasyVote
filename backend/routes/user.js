@@ -29,13 +29,15 @@ router.post('/login', async (req,res)=>{ //use of javascript async/await for syn
     try{
 		//verificationMethod is used for 2FA value is either 0 for email or 1 for phone
         let {email,password, verificationMethod} = req.body; //get password and email from form
-
+		email = email.toLowerCase();
+		console.log(password,email);
         //check if email exist.
-        let user = await User.findOne({email}).exec()
+        let user = await User.findOne({email}).exec();
         if (!user) {
+        	console.log("error no user");
             return res.send({error: 'User authentication failed'}) //return if user does not exist
         }
-
+        console.log("User found");
         user.meta.lastLoginAttempt = Date.now(); //updates last login attempt
         //check if user's password matches stored hash using bcrypt
         let hash = user.password; //get hash from database
@@ -43,7 +45,8 @@ router.post('/login', async (req,res)=>{ //use of javascript async/await for syn
         if (!passwordMatch){
             return res.send({error:"User authentication failed"})
         }
-
+        console.log("Password matched");
+        console.log(verificationMethod)
         //Verify user with 2FA via email or phone
 		if (verificationMethod === 0){ //send pin through email
 
@@ -52,7 +55,7 @@ router.post('/login', async (req,res)=>{ //use of javascript async/await for syn
 			if (!(user.phone.number && user.phone.areaCode)) {
             	return res.send({error:"User does not have a valid phone"})
 			}
-
+			console.log("trying to send verification")
 			//Format phoneNumber
             let phoneNumber = "+" + user.phone.areaCode.toString() + user.phone.number.toString(); //e.146 standard format
 
@@ -64,21 +67,24 @@ router.post('/login', async (req,res)=>{ //use of javascript async/await for syn
 					return res.send({error: "Please try again."})
 				}else{
 					if(result.status == '0'){
+						console.log("sent code")
 						//store verification in user . return userid
 						user.meta.tokenPasscode = result.request_id; //updates token
-						res.send({message:"PIN sent", userID: user._id, verificationMethod})
+						return res.send({message:"PIN sent", userID: user._id, verificationMethod})
 					}else{
-						res.send({error: result.error_text, verificationMethod});
+						console.log(result.error_text)
+						return res.send({error: result.error_text, verificationMethod});
 					}
 				}
 			})
 		}else{
-			return res.error({error:"could not send verification."})
+			return res.send({error:"could not send verification."})
 		}
 
     }
     catch(err) {
-
+    	console.log(err)
+		return {error:err}
     }
 });
 
