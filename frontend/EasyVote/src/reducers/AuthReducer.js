@@ -1,7 +1,14 @@
 const INITIAL_STATE = {
     email: '',
-     //password: '',
-    // password2: '',
+    FirstName: '',
+    LastName: '',
+    Number: '',
+     password: '',
+     password2: '',
+
+
+
+
     // password3: '',
       user: null, 
       error:'', 
@@ -30,6 +37,32 @@ export default (state = INITIAL_STATE , action) => {
 
     case 'password_changed': 
         return {...state, password: action.payload};
+
+    case 'passwordChanged2_changed':
+        return {...state, password2: action.payload};
+
+    case 'number_changed': 
+        return {...state, Number: action.payload};
+
+    case 'FirstName_changed':
+        return {...state, FirstName: action.payload};
+
+    case 'LastName_changed': 
+        return {...state, LastName: action.payload};
+
+    case 'License_changed': 
+        return {...state, Licence: action.payload};
+
+
+    case 'LastFour_changed': 
+        return {...state, fourD: action.payload};
+
+
+
+
+
+
+
 
     case 'password_changed3':  
         return {...state, ID2: action.payload};
