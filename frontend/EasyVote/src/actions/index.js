@@ -1,6 +1,6 @@
 //const IP = '192.168.0.12'
 //const IP = '192.168.2.48'
-const IP = '192.168.0.19'
+const IP = '192.168.0.19';
 //const IP = '127.0.0.1'
 
 
@@ -70,40 +70,35 @@ export const FirstNameChanged = (text) => {
                      return (dispatch) => {
                             dispatch({type: 'Login_user'});
                         
-                            if(email == '' || password=='' || password2=='' || Name =='' || typeof email == 'undefined' || typeof password == 'undefined' || typeof Name == 'undefined' || typeof password2 == 'undefined' ){
-                                dispatch({type: 'LoginUserFail', payload: "Empty Field"});
-                            }
-                            
-                            else{
+                        //     if(email == '' || password=='' || password2=='' || Name =='' || typeof email == 'undefined' || typeof password == 'undefined' || typeof Name == 'undefined' || typeof password2 == 'undefined' ){
+                        //         dispatch({type: 'LoginUserFail', payload: "Empty Field"});
+                        //     }
+                        //     
+                        //     else{
                                 
-                            fetch('http://'+IP+':80/GGfiles/Ap/Signup.php', {
+                            fetch('http://127.0.0.1:8000/login', {
                             method: 'POST',
                             headers: {
                                 'Accept': 'application/json',
                                 'Content-Type': 'application/json',
                             },
                             body: JSON.stringify({
-                            firstName: FirstName,
-                            lastName:LastName,
-                            number:number,
-                                email: email,
-                                password: password,
-                                password2: password2,
-                        licence:Licence,
-                        SIN:fourD
+                            email: email,
+                            password:password,
+
                             }),
-                            }).then((response) => response.json()).then(users => {
+                            }).then((response) =>{
                                 
-                           if( typeof users.Id != 'undefined'){
-                               dispatch({type: 'LoginUserDone', payload: users});
+                           if( response.message){
+                               dispatch({type: 'LoginUserDone', payload: response.message});
                             }
                            else{
-                              dispatch({type: 'LoginUserFail', payload: users});
+                              dispatch({type: 'LoginUserFail', payload: response.errors});
                             }
                             
                             });
                            }
-                          };
+                        //   };
                         };
 
       

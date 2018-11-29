@@ -5,6 +5,7 @@ const INITIAL_STATE = {
     Number: '',
      password: '',
      password2: '',
+    logintrigger:false,
 
 
 
@@ -83,7 +84,7 @@ export default (state = INITIAL_STATE , action) => {
         return {...state, Name2: action.payload};
     case 'LoginUserDone':
     
-        return {...state,Active:action.payload.Active, user: action.payload.Id, Name:'', email:'', error: '',ID2:'', password2:'', password:'',forset:true, forset2:true, done:'true',cow:true, goat:true, loading: false};
+        return {...state,Active:action.payload, logintrigger:true};
     case 'LoginUserFail':
         return {...state,password:'', password2:'',codeone:"",Adstu:true,codetwo:"", ID2:'', error: action.payload, loading: false}; 
     case 'LoginUserFaill':

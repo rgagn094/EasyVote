@@ -18,7 +18,11 @@ import {
 
 class SignUpForm extends Component {
 
-      
+      next(){
+          if(this.props.logintrigger){
+              this.props.navigation.navigate('TwoF');
+          }
+      }
 
      onEmailChanged(text){
         this.props.emailChanged(text);
@@ -82,7 +86,7 @@ class SignUpForm extends Component {
         <Card>
         <FormInput val={this.props.password} ct={this.onPasswordChanged.bind(this)}  bool = {true} ph = {"Input Password"}/>
         </Card>
-        
+            {this.next()}
        {/* </View> */}
        <View >
       <ForwardButton press={this.onButtonPress.bind(this)} place ={'TwoF'}/>
@@ -125,6 +129,7 @@ const styles = StyleSheet.create({
     return{
        email: state.auth.email,
        password: state.auth.password,
+        logintrigger:state.auth.logintrigger,
        }
 };
 
