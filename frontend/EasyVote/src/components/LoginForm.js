@@ -17,6 +17,12 @@ import {
 
 class LoginForm extends Component {
 
+  next(){
+    if(this.props.logintrigger){
+        this.props.navigation.navigate('Profile');
+    }
+}
+
       
   onFirstNameChanged(text){
     this.props.FirstNameChanged(text);
@@ -133,6 +139,7 @@ onLicenseChanged(text){
       <ForwardButton press={this.onButtonPress.bind(this)} place ={'Profile'}/>
        
        </View>
+       {this.next()}
        </View>
        
        
@@ -175,7 +182,8 @@ const styles = StyleSheet.create({
        number: state.auth.Number,
        password2: state.auth.password2,
        Licence:state.auth.Licence,
-       fourD:state.auth.fourD
+       fourD:state.auth.fourD,
+       logintrigger:state.auth.logintrigger,
        
        
     }
