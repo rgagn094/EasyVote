@@ -1,29 +1,50 @@
 //var express = require('express');
 let router = require('express').Router();
 const Election = require('../models/election');
+const ElectionBody = require('../models/electionBody');
 //var election = express.Router();
 
 /*
 Create an election
 */
 
-router.post('/', function(req,res){
+
+router.post('/post/:electionBodyId', function(req,res){
     console.log("Received Post new election request...");
 
-    var newElection = new Election();
-
-    newElection.title = req.body.title;
-    //newElection.candidates = req.body.candidates;
-    //newElection.startDate = req.body.startDate;
-    //newElection.expiryDate = req.body.expiryDate;
-
-    newElection.save(function(err, election){
-        if(err){
+    ElectionBody.findById(req.params.electionBodyId, function(err, electionBody) {
+        if (err) {
             console.log(err);
             res.status(500).send();
         }
-        res.send(election);
-        console.log("Data saved to database");
+        else if (!electionBody) {
+            console.log("Election Body ID not found");
+            res.status(404).send()
+        }
+        else {
+
+
+            var newElection = new Election();
+
+            newElection.title = req.body.title;
+            newElection.candidates = req.body.candidates;//List of candidates and their details
+            newElection.startDate = req.body.startDate;
+            newElection.expiryDate = req.body.expiryDate;
+            newElection.image = req.body.image;
+            newElection.meta = {description: req.body.description, electionBody: req.body.electionBody};
+
+
+            newElection.save(function (err, election) {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send();
+                }
+                    res.status(200).send(election);
+                    console.log("Data saved to database");
+
+
+            });
+        }
     });
 });
 
@@ -32,8 +53,8 @@ router.post('/', function(req,res){
 Get an election
 */
 
-router.get('/:electionId', function(req,res){
-    console.log("Received get by ID request");
+router.get('/getElection/:electionId', function(req,res){
+    console.log("Received get specific election");
 
     Election.findById(req.params.electionId, function(err,foundDoc){
         if(err){
@@ -65,7 +86,7 @@ router.get('/list', function(req,res){
             res.status(500).send();
         }
         else if(!foundData){
-            console.log("No data found");
+            console.log("No elections found");
             res.status(404).send();
         }
         else{
@@ -94,7 +115,7 @@ router.put('/edit/:electionId', function(req,res){
             if(req.body.title){
                 foundDoc.title = req.body.title;
             }
-            /*
+
             if(req.body.candidates){
                 foundDoc.candidates = req.body.candidates;
             }
@@ -104,7 +125,13 @@ router.put('/edit/:electionId', function(req,res){
             if(req.body.expiryDate){  //Must test when elections routing has been implemented
                 foundDoc.expiryDate = req.body.expiryDate;
             }
-*/
+            if(req.body.image){  //Must test when elections routing has been implemented
+                foundDoc.image = req.body.image;
+            }
+            if(req.body.meta){  //Must test when elections routing has been implemented
+                foundDoc.meta = {description:req.body.description, electionBody:req.body.electionBody};
+            }
+
             foundDoc.save(function(err, updatedDoc){
                 if(err){
                     console.log(err);

@@ -2,11 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 var candidateSchema = new Schema({
-    candidateID: {  //Reference to the user that cast the vote
-        type: Schema.Types.ObjectId,
-        ref: 'electionBody',
-        //required: true
-    },
+
     firstName: {//Candidate's legal first name
         type: String,
         required: true,
@@ -18,9 +14,10 @@ var candidateSchema = new Schema({
         lowercase: true,
     },
     image: {	//Any other legal names
-        //TODO
+        type: String,
+        required: true,
     },
-    decription: {
+    description: {
         type: String,
     },
     party: {
@@ -42,14 +39,16 @@ ElectionSchema = new Schema({
     },
     startDate: {  //start date of voting for election
         type: Date,
-        //required: true
+        //required: true,
+        default: Date.now()
     },
     expiryDate: { //end date of voting for election
         type: Date,
-        required: true,
+        //required: true,
+        default: Date.now(),
         validate: [
             function (value) {  //Function to check if end date is later than start date
-                return this.startDate <= value;
+                return this.startDate < value;
             }]
     },
     meta: {
@@ -58,13 +57,13 @@ ElectionSchema = new Schema({
         },
         electionBody: { //Reference to the election body hosting election
             type: Schema.Types.ObjectId,
-            ref: 'electionBody',
-            //required: true
+            ref: 'ElectionBody',
+            required: false
         },
     }
 },{
         timestamps: true
 });
 
-const Election = mongoose.model('Election', ElectionSchema);
+const Election = mongoose.model('election', ElectionSchema);
 module.exports = Election;
