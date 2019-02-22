@@ -148,7 +148,7 @@ router.get('/listAll', function(req,res){
     }else {
       res.status(200).json(foundData);
     }
-  })
+  });
 });
 
 /*

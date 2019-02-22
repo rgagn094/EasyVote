@@ -6,7 +6,8 @@ const expressip = require('express-ip');
 const userRouter = require("./backend/routes/user"); //load routes for users
 const electionBodyRouter = require("./backend/routes/electionbody");
 const voteRouter = require("./backend/routes/vote");
-const electionRouter = require("./backend/routes/election")
+const electionRouter = require("./backend/routes/election");
+const analyticsRouter = require("./backend/routes/analytics");
 /*
 Set up mongodb/mongoose
 */
@@ -31,7 +32,7 @@ app.use('/user', userRouter);
 app.use('/electionBody', electionBodyRouter);
 app.use('/vote', voteRouter);
 app.use('/election', electionRouter);
-
+app.use('/analytics', analyticsRouter);
 
 //used to test if server is running
 app.get('/', (req,res)=>{
