@@ -10,8 +10,18 @@ AnalyticsSchema = new Schema({
     type: String,
     required: true
   },
+  electionID: {     // Reference to the election which the data represents
+    type: Schema.Types.ObjectId,
+    ref: 'election',
+    required: true
+  },
   dataPoints: {   // Array of numbers to be plotted in chart
     type: [Number],
+    required: true
+  },
+  tag: {        // Short tag to identify type of analytic
+    type: String,
+    enum: ['count', 'gender', 'avgage', 'location'],
     required: true
   }
 });
