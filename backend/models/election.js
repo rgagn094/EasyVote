@@ -42,7 +42,7 @@ ElectionSchema = new Schema({
         //required: true,
         default: Date.now()
     },
-    expiryDate: { //end date of voting for election
+    endDate: { //end date of voting for election
         type: Date,
         //required: true,
         default: Date.now(),

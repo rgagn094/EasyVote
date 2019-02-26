@@ -45,7 +45,7 @@ VoteSchema = new Schema({
       type: Number,
       required: true
     },
-    gender:{  //Geneder of voter
+    gender:{  //Gender of voter
       type: String,
       enum: ['male', 'female', 'other'],
       required: true
