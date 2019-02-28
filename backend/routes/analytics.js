@@ -14,7 +14,7 @@ async function asyncForEach(array, callback){
 }
 
 /*
-Get the count of all the votes for each candidate
+Get analytics for a particular election
 tags:
   count:    Returns the total number of votes for each candidate
   gender:   Returns the votes by gender for each candidate
