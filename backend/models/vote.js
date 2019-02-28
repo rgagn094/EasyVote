@@ -19,14 +19,6 @@ VoteSchema = new Schema({
     type: String,
     required: true
   },
-  geoLocation: {  //Physical coordinates vote was made (security)
-    type: [Number],
-    required: true
-  },
-  country: {
-    type: String,
-    required: true
-  },
   ipAddress: { //IP address at the point of vote (security)
     type: String,
     required: true
@@ -36,8 +28,52 @@ VoteSchema = new Schema({
     ref: 'election',
     required: true
   },
+  locationCode:{
+    state: {
+      type: String,
+      required: true
+    },
+    country: {
+      type: String,
+      required: true
+    },
+    continent: {
+      type: String,
+      required: true
+    }
+  },
+  geoLocation: {  //Physical coordinates vote was made (security)
+    accuracy_radius:{
+      type: Number,
+      required: true
+    },
+    latitude:{
+      type: Number,
+      required: true
+    },
+    longitude:{
+      type: Number,
+      required: true
+    },
+    time_zone:{
+      type: String,
+      required: true
+    }
+  },
   demographics: {
     city: { //province of the user at the time of vote
+      type: String,
+      required: true
+    },
+    state: {
+      type: String,
+      required: true
+    },
+    country: {
+      type: String,
+      required: true
+    },
+    continent: {
       type: String,
       required: true
     },

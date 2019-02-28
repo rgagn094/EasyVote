@@ -18,17 +18,17 @@
   },
   "homepage": "https://github.com/rgagn094/EasyVote#readme",
   "dependencies": {
-    "bcrypt": "^3.0.2",
+    "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",
     "crypto": "^1.0.1",
     "express": "^4.16.4",
-    "express-ip": "^1.0.3",
-    "express-validator": "^5.3.0",
-    "jsonwebtoken": "^8.3.0",
-    "mongoose": "^5.3.7",
-    "nexmo": "^2.4.0",
+    "express-validator": "^5.3.1",
+    "geo-from-ip": "^1.2.0",
+    "jsonwebtoken": "^8.5.0",
+    "mongoose": "^5.4.16",
+    "nexmo": "^2.4.1",
     "nodemailer": "^4.7.0",
-    "nodemon": "^1.18.5"
+    "nodemon": "^1.18.10"
   },
   "devDependencies": {}
 }

@@ -19,9 +19,13 @@ AnalyticsSchema = new Schema({
     type: [Number],
     required: true
   },
+  dataLabels: {
+    type: [String],
+    required: true
+  },
   tag: {        // Short tag to identify type of analytic
     type: String,
-    enum: ['count', 'gender', 'avgage', 'location'],
+    enum: ['count', 'gender', 'avgAge', 'ageGroup', 'province'],
     required: true
   }
 });

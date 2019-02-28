@@ -2,7 +2,6 @@ const express = require('express'); //import express
 const bodyParser = require("body-parser"); //used to extract information from forms
 const app = express(); //initiale a new express application
 const port = 8000; //port this app will listen on
-const expressip = require('express-ip');
 const userRouter = require("./backend/routes/user"); //load routes for users
 const electionBodyRouter = require("./backend/routes/electionbody");
 const voteRouter = require("./backend/routes/vote");
@@ -23,7 +22,6 @@ mongoose.connect(uri, {useNewUrlParser: true}).then(()=>{
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
-app.use(expressip().getIpInfoMiddleware);
 
 /*
 Configure routes
