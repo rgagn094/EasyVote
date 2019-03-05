@@ -2,11 +2,11 @@ const express = require('express'); //import express
 const bodyParser = require("body-parser"); //used to extract information from forms
 const app = express(); //initiale a new express application
 const port = 8000; //port this app will listen on
-const expressip = require('express-ip');
 const userRouter = require("./backend/routes/user"); //load routes for users
 const electionBodyRouter = require("./backend/routes/electionbody");
 const voteRouter = require("./backend/routes/vote");
-const electionRouter = require("./backend/routes/election")
+const electionRouter = require("./backend/routes/election");
+const analyticsRouter = require("./backend/routes/analytics");
 /*
 Set up mongodb/mongoose
 */
@@ -22,7 +22,6 @@ mongoose.connect(uri, {useNewUrlParser: true}).then(()=>{
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
-app.use(expressip().getIpInfoMiddleware);
 
 /*
 Configure routes
@@ -31,7 +30,7 @@ app.use('/user', userRouter);
 app.use('/electionBody', electionBodyRouter);
 app.use('/vote', voteRouter);
 app.use('/election', electionRouter);
-
+app.use('/analytics', analyticsRouter);
 
 //used to test if server is running
 app.get('/', (req,res)=>{

@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const Vote = require('../models/vote');
 const User = require('../models/user');
-const expressip = require('express-ip');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+const geoip = require('geo-from-ip');
 
 function calculateAge(birthDate){
   var diff = Date.now() - birthDate.getTime();
@@ -53,14 +53,22 @@ router.post('/cast/:electionID/:userID', function(req,res){
         }else{
           //Create new vote
           let newVote = new Vote();
+          let ip = req.headers['x-forwarded-for'] ||
+             req.connection.remoteAddress ||
+             req.socket.remoteAddress ||
+             (req.connection.socket ? req.connection.socket.remoteAddress : null);
+          let ipInfo = geoip.allData(ip);
 
           newVote.hashedID = encrypted;
           newVote.candidate = req.body.candidate;
-          newVote.geoLocation = [45.4215, 75.6972]; //req.ipInfo.ll; - Use once on remote server
-          newVote.country = "Canada"; //req.ipInfo.country; - Use once on remote server
-          newVote.ipAddress = req.ip;
+          newVote.geoLocation = {accuracy_radius: 10, latitude: 45.4289, longitude: -75.6844, time_zone: 'America/Toronto'}; //ipInfo.location; - Use once on remote server
+          newVote.demographics.country = "Canada"; //ipInfo.country; - Use once on remote server
+          newVote.demographics.continent = "North America"; //ipInfo.continent; - Use once on remote server
+          newVote.locationCode = {state: "ON",country: "CA",continent: "NA"}; //ipInfo.code; - Use once on remote server
+          newVote.ipAddress = ip;
           newVote.electionID = req.params.electionID;
-          newVote.demographics.city = "Ottawa"; //req.ipInfo.city; - Use once on remote server
+          newVote.demographics.city = "Ottawa"; //ipInfo.city; - Use once on remote server
+          newVote.demographics.state = "Ontario"; //ipInfo.state; - Use once on remote server
           newVote.demographics.age = age;
           newVote.demographics.gender =  user.demographics.gender;
 
@@ -104,7 +112,7 @@ router.post('/cast/:electionID/:userID', function(req,res){
             }
           });
           console.log("Vote saved to database");
-          res.status(200).json(newVote)
+          res.status(200).json(newVote);
         }
       });
     }
@@ -148,7 +156,7 @@ router.get('/listAll', function(req,res){
     }else {
       res.status(200).json(foundData);
     }
-  })
+  });
 });
 
 /*
