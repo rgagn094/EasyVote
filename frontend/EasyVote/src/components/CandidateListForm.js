@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {Text} from 'react-native';
-import {HeaderSet} from './index';
+import {HomeHeader2} from './index';
 import {connect} from 'react-redux';
 //import {connect} from 'react-redux';
+import ProfileEditHome from './ProfileEditHome';
 import {Fetchelection} from '../actions';
 import { AsyncStorage } from "react-native"
 import ProfileHome from './ProfileHome';
@@ -16,18 +17,56 @@ import {
 
 
 
-class ProfileForm extends Component {
-  constructor(props) {
-    super(props);
-  this.state = {
-    elections: [
-  ],
-}
-  }
+
+class CandidateListForm extends Component {
+    constructor(props) {
+        super(props);
+      this.state = {
+        profiles: [
+          {
+            Name: "Donald Trump",
+            Party: '../.././images/profile.png',
+            Age:24
+    
+          }, 
+         {
+          Name: "Howard Schultz",
+          Party: '../.././images/profile.png',
+          Age:24
+            
+          },
+          {
+            Name: "Elizabeth Warren",
+            Party: "Republican",
+            Age:24
+    
+          }, 
+         {
+          Name: "Beto O'Rourke",
+          Party: "Democrats",
+          Age:24
+            
+          },
+          {
+            Name: "Bernie Sanders",
+            Party: "Republican",
+            Age:24
+    
+          }, 
+         {
+          Name: "Kamala Harris",
+          Party: "Democrats",
+          Age:24
+            
+          },
+          
+      ],
+    }
+      }
 
 
   componentDidMount(){
-    this.props.Fetchelection();
+    //this.props.Fetchelection();
 
   }
 
@@ -57,14 +96,14 @@ class ProfileForm extends Component {
   } */
 
   getProfiles(){
-    return  this.props.elections;
+    return  this.state.profiles;
   }
     
 
   renderRow(item){
-    return <Text /*navigate={this.state.nav}*/>
-      {item.Name}
-          </Text>
+    return <ProfileEditHome Name = {item.Name} /> 
+      
+          
    }
 
   renderButton(){ 
@@ -91,7 +130,7 @@ class ProfileForm extends Component {
     //const {vall} = this.props;
     return (
     <SafeAreaView style={{width:'100%', height:'100%',backgroundColor:'white',alignItems:'center', marginTop:'5%'}}>
-    <HeaderSet place2={'ProfileEdit'} press = {this.props.navigation.navigate} place ={'SettingsEdit'}/>
+    <HomeHeader2 place2={'ProfileEdit'} ti="Candidates" /* press = {this.props.navigation.navigate} */ place ={'SettingsEdit'}/>
       {this.renderButton()}
       </SafeAreaView>
       );
@@ -126,4 +165,4 @@ const styles = StyleSheet.create({
   return {elections,loading:state.pro.loading1};
   };
 
-export default connect(mapStateToProps,{Fetchelection})(ProfileForm) ;
+export default CandidateListForm; //connect(mapStateToProps,{Fetchelection})(ElectionsListForm) ;

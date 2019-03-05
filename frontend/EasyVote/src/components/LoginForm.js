@@ -87,7 +87,7 @@ onLicenseChanged(text){
     return (
     <SafeAreaView style={{backgroundColor:'white', height:'100%'}}>
     <HomeHeader2 navigate={this.props.navigation.goBack}/>
-      <KeyboardAvoidingView style={{width:'90%',alignSelf:'center', marginBottom:'0%'}}  behavior = {(Platform.OS === 'ios') ? 'position' : 'height'}>
+      <KeyboardAvoidingView style={{width:'90%',alignSelf:'center', marginBottom:'0%'}}  behavior = {(Platform.OS === 'ios') ? 'height' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
         <View style = {styles.viewStyle}>

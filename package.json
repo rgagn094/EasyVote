@@ -28,7 +28,8 @@
     "mongoose": "^5.3.7",
     "nexmo": "^2.4.0",
     "nodemailer": "^4.7.0",
-    "nodemon": "^1.18.5"
+    "nodemon": "^1.18.5",
+    "react-native": "^0.58.4"
   },
   "devDependencies": {}
 }
