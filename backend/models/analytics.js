@@ -19,7 +19,7 @@ AnalyticsSchema = new Schema({
     type: [Number],
     required: true
   },
-  dataLabels: {
+  dataLabels: {   // Array of labels for each of data point
     type: [String],
     required: true
   },
