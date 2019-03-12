@@ -25,6 +25,7 @@ tags:
 router.get('/:electionID/:tag', async function(req,res){
   console.log("Request recevied for count analytic");
   // Check if election is closed ie: all votes submitted
+  /*
   try{
     var election = await Election.findById(req.params.electionID).exec();
     if(!election){
@@ -44,14 +45,13 @@ router.get('/:electionID/:tag', async function(req,res){
     res.status(500).send();
     return;
   }
+  */
 
   // Check if analytics object already exists for this election
   try{
-    let analytic = await Analytics.findOne({electionID: req.params.electionID, tag: req.params.tag}).exec();
+    let analytic = await Analytics.findOneAndDelete({electionID: req.params.electionID, tag: req.params.tag}).exec();
     if(analytic){
-      res.status(200).json(analytic);
-      console.log("Analytic object already exists. Returning...");
-      return;
+      console.log("Deleted old analytic object.");
     }
   } catch(err){
     console.log(err);
