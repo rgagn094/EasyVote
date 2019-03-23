@@ -149,24 +149,6 @@ router.put('/edit/:electionId', function(req,res){
 /*
 delete election
 */
-router.delete('/deleteElection/:electionId', function (req, res) {
-    res.send('Got a DELETE request')
-    console.log("Received get all logs request...");
-
-    Election.deleteOne({}, function(err){
-        if(err){
-            console.log(err);
-            res.status(500).send();
-        }
-        else if(!foundData){
-            console.log("Does not exist");
-            res.status(404).send();
-        }
-        else{
-            res.send('success!!!');
-        }
-    });
-});
 
 
 
