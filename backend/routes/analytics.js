@@ -25,33 +25,35 @@ tags:
 router.get('/:electionID/:tag', async function(req,res){
   console.log("Request recevied for count analytic");
   // Check if election is closed ie: all votes submitted
-  try{
-    var election = await Election.findById(req.params.electionID).exec();
-    if(!election){
-      console.log("Election ID not found");
-      res.status(404).send();
-      return;
-    }
-    else{
-      if(election.endDate.getTime() > Date.now()){
-        console.log("Cannot provide analytics until end of voting:", election.endDate);
-        res.status(400).send();
+
+  if(req.tag == "count" || req.tag == "gender" || req.tag == "avgAge"){
+    try{
+      var election = await Election.findById(req.params.electionID).exec();
+      if(!election){
+        console.log("Election ID not found");
+        res.status(404).send();
         return;
       }
+      else{
+        if(election.endDate.getTime() > Date.now()){
+          console.log("Cannot provide this analytic until end of voting:", election.endDate);
+          res.status(400).send();
+          return;
+        }
+      }
+    } catch(err){
+      console.log(err);
+      res.status(500).send();
+      return;
     }
-  } catch(err){
-    console.log(err);
-    res.status(500).send();
-    return;
   }
+
 
   // Check if analytics object already exists for this election
   try{
-    let analytic = await Analytics.findOne({electionID: req.params.electionID, tag: req.params.tag}).exec();
+    let analytic = await Analytics.findOneAndDelete({electionID: req.params.electionID, tag: req.params.tag}).exec();
     if(analytic){
-      res.status(200).json(analytic);
-      console.log("Analytic object already exists. Returning...");
-      return;
+      console.log("Deleted old analytic object.");
     }
   } catch(err){
     console.log(err);
@@ -74,8 +76,7 @@ router.get('/:electionID/:tag', async function(req,res){
         // Get all votes for each candidate
         var name = candidate.firstName + ' ' + candidate.lastName;
         try{
-          // TODO: Make sure all votes have been authenticated
-          let votes = await Vote.find({electionID: req.params.electionID, candidate: name}).exec();
+          let votes = await Vote.find({electionID: req.params.electionID, candidate: name, authenticated: true}).exec();
           console.log("Total number of votes found: %d", votes.length);
           data.push(votes.length);
           labels.push(name);
@@ -94,9 +95,8 @@ router.get('/:electionID/:tag', async function(req,res){
         // Get all votes for each candidate
         var name = candidate.firstName + ' ' + candidate.lastName;
         try{
-          // TODO: Make sure all votes have been authenticated
           let maleCount = 0, femaleCount = 0, otherCount = 0;
-          let votes = await Vote.find({electionID: req.params.electionID, candidate: name}).exec();
+          let votes = await Vote.find({electionID: req.params.electionID, candidate: name, authenticated: true}).exec();
           for (let index = 0; index < votes.length; index++) {
             if(votes[index].demographics.gender == "male")  maleCount++;
             else if(votes[index].demographics.gender == "female") femaleCount++;
@@ -124,9 +124,8 @@ router.get('/:electionID/:tag', async function(req,res){
         // Get all votes for each candidate
         var name = candidate.firstName + ' ' + candidate.lastName;
         try{
-          // TODO: Make sure all votes have been authenticated
           let sum = 0, avgAge = 0;
-          let votes = await Vote.find({electionID: req.params.electionID, candidate: name}).exec();
+          let votes = await Vote.find({electionID: req.params.electionID, candidate: name, authenticated: true}).exec();
           for (let index = 0; index < votes.length; index++) {
             sum += votes[index].demographics.age;
           }
@@ -147,7 +146,7 @@ router.get('/:electionID/:tag', async function(req,res){
       newAnalytic.tag = req.params.tag;
       let age18To24 = 0, age25To44 = 0, age45To64 = 0, age65Plus = 0;
       try{
-        let votes = await Vote.find({electionID: req.params.electionID}).exec();
+        let votes = await Vote.find({electionID: req.params.electionID, authenticated: true}).exec();
         for (let index = 0; index < votes.length; index++){
           if(votes[index].demographics.age <= 24) age18To24++;
           else if(votes[index].demographics.age <= 44) age25To44++;
@@ -189,7 +188,7 @@ router.get('/:electionID/:tag', async function(req,res){
       newAnalytic.description = "Number of voters from top 5 most voted from provinces and territories";
       newAnalytic.tag = req.params.tag;
       try{
-        let votes = await Vote.find({electionID: req.params.electionID}).exec();
+        let votes = await Vote.find({electionID: req.params.electionID, authenticated: true}).exec();
         for (let index = 0; index < votes.length; index++){   // Count votes for each province
           let code = votes[index].locationCode.state;
           provinceMap.set(code,(provinceMap.get(code)+1));
